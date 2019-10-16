@@ -24,7 +24,7 @@ import frc.robot.subsystems.ConveyorBelt;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ConveyorBelt conveyorBelt = new ConveyorBelt();
+  public static ConveyorBelt conveyorBelt = new ConveyorBelt(); // Please initialize in roboInit()
   public static OI m_oi;
 
   Command m_autonomousCommand;
