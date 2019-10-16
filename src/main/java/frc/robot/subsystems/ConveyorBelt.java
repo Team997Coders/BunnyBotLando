@@ -7,7 +7,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -15,7 +19,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ConveyorBelt extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  
+  VictorSPX beltyBoi;
+
+  public ConveyorBelt(){
+    beltyBoi = new VictorSPX(RobotMap.beltyBoi);
+  }
+
+  public void ConveyorForward(){
+    beltyBoi.set(ControlMode.PercentOutput, .5);
+  }
+
+  public void ConveyorBackward(){
+    beltyBoi.set(ControlMode.PercentOutput, -.5);
+  }
+
+  public void ConveyorStop(){
+    beltyBoi.set(ControlMode.PercentOutput, 0);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

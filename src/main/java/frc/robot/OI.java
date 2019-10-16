@@ -7,6 +7,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ConveyorBackward;
+import frc.robot.commands.ConveyorForward;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -19,7 +25,16 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
-
+  Joystick gamepad;
+  Button rightBumper;
+  Button leftBumper;
+  public OI(){
+    gamepad = new Joystick(0);
+    rightBumper = new JoystickButton(gamepad, RobotMap.rightBumper);
+    leftBumper = new JoystickButton(gamepad, RobotMap.leftBumper);
+    rightBumper.whileHeld(new ConveyorForward());
+    leftBumper.whileHeld(new ConveyorBackward());
+  }
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
