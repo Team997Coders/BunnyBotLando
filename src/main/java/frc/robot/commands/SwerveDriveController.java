@@ -16,7 +16,7 @@ public class SwerveDriveController extends Command {
     double s = Robot.getOi().getAxis(0);
     double r = Robot.getOi().getAxis(0);
 
-    SwerveMixerData dat = Robot.getSwerve().SwerveMixer(f, s, r);
+    SwerveMixerData dat = Robot.getSwerve().getSwerveData(f, s, r);
     Robot.getSwerve().setSwerveInput(dat);
 
   }
