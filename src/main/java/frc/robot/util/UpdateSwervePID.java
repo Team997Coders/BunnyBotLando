@@ -6,29 +6,29 @@ import frc.robot.RobotMap;
 
 public class UpdateSwervePID {
 
-  public double lastP, lastI, lastD;
+  private double mLastP, mLastI, mLastD;
 
   public UpdateSwervePID() {
-    lastP = RobotMap.Values.azimuthP;
-    lastI = RobotMap.Values.azimuthI;
-    lastD = RobotMap.Values.azimuthD;
+    mLastP = RobotMap.Values.AZIMUTH_P;
+    mLastI = RobotMap.Values.AZIMUTH_I;
+    mLastD = RobotMap.Values.AZIMUTH_D;
 
-    SmartDashboard.putNumber("swerve/aziP", lastP);
-    SmartDashboard.putNumber("swerve/aziI", lastI);
-    SmartDashboard.putNumber("swerve/aziD", lastD);
+    SmartDashboard.putNumber("swerve/aziP", mLastP);
+    SmartDashboard.putNumber("swerve/aziI", mLastI);
+    SmartDashboard.putNumber("swerve/aziD", mLastD);
 
     SmartDashboard.setPersistent("swerve/aziP");
     SmartDashboard.setPersistent("swerve/aziI");
     SmartDashboard.setPersistent("swerve/aziD");
   }
 
-  public void Update() {
+  public void update() {
     double p = SmartDashboard.getNumber("swerve/aziP", 0.0);
     double i = SmartDashboard.getNumber("swerve/aziI", 0.0);
     double d = SmartDashboard.getNumber("swerve/aziD", 0.0);
 
-    if ((p != lastP || i != lastI) || d != lastD) {
-      Robot.swerve.updateAzimuthPID(p, i, d);
+    if ((p != mLastP || i != mLastI) || d != mLastD) {
+      Robot.getSwerve().updateAzimuthPID(p, i, d);
     }
   }
 

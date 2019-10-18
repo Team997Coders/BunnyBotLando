@@ -19,15 +19,15 @@ public class RobotMap {
 
     public static final int
 
-      azimuth0 = 1,
-      azimuth1 = 3,
-      azimuth2 = 5,
-      azimuth3 = 7,
+      AZIMUTH_0 = 1,
+      AZIMUTH_1 = 3,
+      AZIMUTH_2 = 5,
+      AZIMUTH_3 = 7,
 
-      drive0 = 2,
-      drive1 = 4,
-      drive2 = 6,
-      drive3 = 8;
+      DRIVE_0 = 2,
+      DRIVE_1 = 4,
+      DRIVE_2 = 6,
+      DRIVE_3 = 8;
 
   }
 
@@ -35,14 +35,14 @@ public class RobotMap {
 
     public static final double
 
-      moduleForward0 = 1.07788, // Redo
-      moduleForward1 = 0,
-      moduleForward2 = 0,
-      moduleForward3 = 0,
+      MODULE_FORWARD_0 = 1.07788, // Redo
+      MODULE_FORWARD_1 = 0,
+      MODULE_FORWARD_2 = 0,
+      MODULE_FORWARD_3 = 0,
 
-      azimuthP = 0.001,
-      azimuthI = 0.0,
-      azimuthD = 0.00005;
+      AZIMUTH_P = 0.001,
+      AZIMUTH_I = 0.0,
+      AZIMUTH_D = 0.00005;
 
   }
 }

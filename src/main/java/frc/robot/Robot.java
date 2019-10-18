@@ -27,13 +27,13 @@ import frc.robot.util.UpdateSwervePID;
  */
 public class Robot extends TimedRobot {
 
-  public static Swerve swerve;
-  public static OI m_oi;
-  public static SpartanRunner runner;
+  private static Swerve mSwerve;
+  private static OI mOi;
+  private static SpartanRunner mRunner;
   private UpdateSwervePID mPidTuner;
 
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  Command mAutonomousCommand;
+  SendableChooser<Command> mChooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -44,14 +44,14 @@ public class Robot extends TimedRobot {
 
     mPidTuner = new UpdateSwervePID();
 
-    runner = new SpartanRunner(20);
+    mRunner = new SpartanRunner(20);
 
-    swerve = new Swerve();
+    mSwerve = new Swerve();
 
-    m_oi = new OI();
-    m_chooser.setDefaultOption("Do Nothing", new AutoDoNothing());
+    mOi = new OI();
+    mChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    SmartDashboard.putData("Auto mode", mChooser);
   }
 
   /**
@@ -64,8 +64,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    swerve.updateSmartDashboard();
-    mPidTuner.Update();
+    mSwerve.updateSmartDashboard();
+    mPidTuner.update();
   }
 
   /**
@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    mAutonomousCommand = mChooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -105,8 +105,8 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
+    if (mAutonomousCommand != null) {
+      mAutonomousCommand.start();
     }
   }
 
@@ -124,8 +124,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (mAutonomousCommand != null) {
+      mAutonomousCommand.cancel();
     }
   }
 
@@ -143,4 +143,9 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
+  public static Swerve getSwerve() { return mSwerve; }
+  public static OI getOi() { return mOi; }
+  public static SpartanRunner getRunner() { return mRunner; }
+
 }
