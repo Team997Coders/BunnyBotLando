@@ -28,7 +28,7 @@ public class UpdateSwervePID {
     double d = SmartDashboard.getNumber("swerve/aziD", 0.0);
 
     if ((p != lastP || i != lastI) || d != lastD) {
-      Robot.swerve.UpdatePID(p, i, d);
+      Robot.swerve.updateAzimuthPID(p, i, d);
     }
   }
 

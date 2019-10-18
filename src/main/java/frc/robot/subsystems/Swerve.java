@@ -13,27 +13,27 @@ public class Swerve extends SwerveDrive {
   public Swerve() {
     super(1, 1);
 
-    super.modules = new ProtoModule[4];
+    modules = new ProtoModule[4];
 
-    super.modules[0] = new ProtoModule(0, RobotMap.Ports.azimuth0, RobotMap.Ports.drive0, 0, 1.06, // Change
+    modules[0] = new ProtoModule(0, RobotMap.Ports.azimuth0, RobotMap.Ports.drive0, 0, 1.06, // Change
       RobotMap.Values.azimuthP, RobotMap.Values.azimuthI, RobotMap.Values.azimuthD); // TODO: Probably need to fix this later. Just remove it from the constructor set it up later
-    super.modules[0].setDefaultCommand(new UpdateModule(super.modules[0], this));
-    super.modules[1] = new ProtoModule(1, RobotMap.Ports.azimuth1, RobotMap.Ports.drive1, 1, 0.0,//Change
+    modules[0].setDefaultCommand(new UpdateModule(modules[0], this));
+    modules[1] = new ProtoModule(1, RobotMap.Ports.azimuth1, RobotMap.Ports.drive1, 1, 0.0,//Change
       RobotMap.Values.azimuthP, RobotMap.Values.azimuthI, RobotMap.Values.azimuthD);
-    super.modules[1].setDefaultCommand(new UpdateModule(super.modules[1], this));
-    super.modules[2] = new ProtoModule(2, RobotMap.Ports.azimuth2, RobotMap.Ports.drive2, 2, 0.0,//Change
+    modules[1].setDefaultCommand(new UpdateModule(modules[1], this));
+    modules[2] = new ProtoModule(2, RobotMap.Ports.azimuth2, RobotMap.Ports.drive2, 2, 0.0,//Change
       RobotMap.Values.azimuthP, RobotMap.Values.azimuthI, RobotMap.Values.azimuthD);
-    super.modules[2].setDefaultCommand(new UpdateModule(super.modules[2], this));
-    super.modules[3] = new ProtoModule(3, RobotMap.Ports.azimuth3, RobotMap.Ports.drive3, 3, 0.0,//Change
+    modules[2].setDefaultCommand(new UpdateModule(modules[2], this));
+    modules[3] = new ProtoModule(3, RobotMap.Ports.azimuth3, RobotMap.Ports.drive3, 3, 0.0,//Change
       RobotMap.Values.azimuthP, RobotMap.Values.azimuthI, RobotMap.Values.azimuthD);
-    super.modules[3].setDefaultCommand(new UpdateModule(super.modules[3], this));
+    modules[3].setDefaultCommand(new UpdateModule(modules[3], this));
 
     setDefaultCommand(new SwerveDriveController());
   }
 
-  public void UpdatePID(double p, double i, double d) {
-    for (SwerveModule mod : super.modules) {
-      
+  public void updateSmartDashboard() {
+    for (SwerveModule mod : modules) {
+      mod.updateSmartDashboard();
     }
   }
 

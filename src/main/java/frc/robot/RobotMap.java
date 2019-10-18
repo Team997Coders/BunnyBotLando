@@ -35,19 +35,14 @@ public class RobotMap {
 
     public static final double
 
+      moduleForward0 = 1.07788, // Redo
+      moduleForward1 = 0,
+      moduleForward2 = 0,
+      moduleForward3 = 0,
+
       azimuthP = 0.001,
       azimuthI = 0.0,
       azimuthD = 0.00005;
 
   }
-
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
-
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
 }
