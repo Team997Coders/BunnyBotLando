@@ -14,6 +14,33 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
+
+  public static class Ports {
+
+    public static final int
+
+      azimuth0 = 1,
+      azimuth1 = 3,
+      azimuth2 = 5,
+      azimuth3 = 7,
+
+      drive0 = 2,
+      drive1 = 4,
+      drive2 = 6,
+      drive3 = 8;
+
+  }
+
+  public static class Values {
+
+    public static final double
+
+      azimuthP = 0.001,
+      azimuthI = 0.0,
+      azimuthD = 0.00005;
+
+  }
+
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
   // public static int leftMotor = 1;
