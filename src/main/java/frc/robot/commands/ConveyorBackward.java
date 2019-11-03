@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * TODO: Again m8 what is with the excessive amount of recoding? You can
+ * add a speed parameter to the constructor of the class which makes it
+ * much easier to change speeds later down the road. Please get rid of the
+ * two classes and make one class to do both.
  */
 public class ConveyorBackward extends Command {
   public ConveyorBackward() {
