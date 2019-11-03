@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,6 +11,24 @@ import frc.robot.commands.ConveyorForward;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+  
+  // TODO: Please assign your member variables a visibility
+  Joystick gamepad;
+  Button rightBumper;
+  Button leftBumper;
+  
+  public OI(){
+    
+    gamepad = new Joystick(0);
+    
+    rightBumper = new JoystickButton(gamepad, RobotMap.rightBumper);
+    leftBumper = new JoystickButton(gamepad, RobotMap.leftBumper);
+    
+    rightBumper.whileHeld(new ConveyorForward());
+    leftBumper.whileHeld(new ConveyorBackward());
+    
+  }
+  
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -25,16 +36,6 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
-  Joystick gamepad;
-  Button rightBumper;
-  Button leftBumper;
-  public OI(){
-    gamepad = new Joystick(0);
-    rightBumper = new JoystickButton(gamepad, RobotMap.rightBumper);
-    leftBumper = new JoystickButton(gamepad, RobotMap.leftBumper);
-    rightBumper.whileHeld(new ConveyorForward());
-    leftBumper.whileHeld(new ConveyorBackward());
-  }
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
