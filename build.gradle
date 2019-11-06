@@ -18,6 +18,7 @@ deploy {
             // You can use getTeamOrDefault(team) instead of getTeamNumber if you
             // want to store a team number in this file.
             team = frc.getTeamOrDefault(997)
+            
         }
     }
     artifacts {
@@ -54,7 +55,8 @@ dependencies {
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
     testCompile 'junit:junit:4.12'
-    implementation 'com.github.team997coders:SpartanLib:swerve-SNAPSHOT'
+    // compile 'com.github.team997coders:SpartanLib:swerve-SNAPSHOT'
+    compile files('../SpartanLib/build/libs/spartanlib-all.jar')
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')

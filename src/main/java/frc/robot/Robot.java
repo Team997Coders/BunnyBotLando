@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import org.team997coders.spartanlib.commands.UpdateModule;
 import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -27,9 +28,9 @@ import frc.robot.util.UpdateSwervePID;
  */
 public class Robot extends TimedRobot {
 
-  private static Swerve mSwerve;
-  private static OI mOi;
-  private static SpartanRunner mRunner;
+  public static Swerve mSwerve;
+  public static OI mOi;
+  public static SpartanRunner mRunner;
   private UpdateSwervePID mPidTuner;
 
   Command mAutonomousCommand;
@@ -143,9 +144,5 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
-
-  public static Swerve getSwerve() { return mSwerve; }
-  public static OI getOi() { return mOi; }
-  public static SpartanRunner getRunner() { return mRunner; }
 
 }

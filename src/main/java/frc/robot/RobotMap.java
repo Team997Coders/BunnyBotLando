@@ -35,12 +35,12 @@ public class RobotMap {
 
     public static final double
 
-      MODULE_FORWARD_0 = 1.07788, // Redo
-      MODULE_FORWARD_1 = 0,
+      MODULE_FORWARD_0 = 0.56,
+      MODULE_FORWARD_1 = 1.66,
       MODULE_FORWARD_2 = 0,
       MODULE_FORWARD_3 = 0,
 
-      AZIMUTH_P = 0.001,
+      AZIMUTH_P = 0.01, // 0.001,
       AZIMUTH_I = 0.0,
       AZIMUTH_D = 0.00005;
 

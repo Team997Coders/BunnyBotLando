@@ -7,17 +7,19 @@ import frc.robot.Robot;
 
 public class SwerveDriveController extends Command {
 
-  public SwerveDriveController() { }
+  public SwerveDriveController() {
+    requires(Robot.mSwerve);
+  }
 
   @Override
   protected void execute() {
 
-    double f = -Robot.getOi().getAxis(0);
-    double s = Robot.getOi().getAxis(0);
-    double r = Robot.getOi().getAxis(0);
+    double f = -Robot.mOi.getAxis(1);
+    double s = Robot.mOi.getAxis(0);
+    double r = Robot.mOi.getAxis(4);
 
-    SwerveMixerData dat = Robot.getSwerve().getSwerveData(f, s, r);
-    Robot.getSwerve().setSwerveInput(dat);
+    SwerveMixerData dat = Robot.mSwerve.getSwerveData(f, s, r);
+    Robot.mSwerve.setSwerveInput(dat);
 
   }
 
