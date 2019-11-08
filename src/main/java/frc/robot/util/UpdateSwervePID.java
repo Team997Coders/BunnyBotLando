@@ -17,20 +17,22 @@ public class UpdateSwervePID {
     SmartDashboard.putNumber("swerve/aziP", mLastP);
     SmartDashboard.putNumber("swerve/aziI", mLastI);
     SmartDashboard.putNumber("swerve/aziD", mLastD);
+    SmartDashboard.putNumber("swerve/pidSubmit", 0);
 
     SmartDashboard.setPersistent("swerve/aziP");
     SmartDashboard.setPersistent("swerve/aziI");
     SmartDashboard.setPersistent("swerve/aziD");
+    SmartDashboard.setPersistent("swerve/pidSubmit");
   }
 
   public void update() {
+    int a = (int)SmartDashboard.getNumber("swerve/pidSubmit", 0);
+    if (a != 0) {
     double p = SmartDashboard.getNumber("swerve/aziP", 0.0);
     double i = SmartDashboard.getNumber("swerve/aziI", 0.0);
     double d = SmartDashboard.getNumber("swerve/aziD", 0.0);
-
-    if ((p != mLastP || i != mLastI) || d != mLastD) {
-      Robot.mSwerve.updateAzimuthPID(p, i, d);
-    }
+    Robot.mSwerve.updateAzimuthPID(p, i, d);
+  }
   }
 
 }
