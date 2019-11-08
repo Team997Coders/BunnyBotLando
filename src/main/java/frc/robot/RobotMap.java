@@ -17,32 +17,53 @@ public class RobotMap {
 
   public static class Ports {
 
-    public static final int
+    public static final int[]
 
-      AZIMUTH_0 = 1,
-      AZIMUTH_1 = 3,
-      AZIMUTH_2 = 5,
-      AZIMUTH_3 = 7,
+      AZIMUTH = {
+        1,
+        3,
+        5,
+        7
+      },
 
-      DRIVE_0 = 2,
-      DRIVE_1 = 4,
-      DRIVE_2 = 6,
-      DRIVE_3 = 8;
+      DRIVE = {
+        2,
+        4,
+        6,
+        8
+      };
 
   }
 
   public static class Values {
 
-    public static final double
+    public static final double[]
 
-      MODULE_FORWARD_0 = 0.56,
-      MODULE_FORWARD_1 = 1.66,
-      MODULE_FORWARD_2 = 0,
-      MODULE_FORWARD_3 = 0,
+      MODULE_FORWARD = {
+        0.56,
+        1.66,
+        0,
+        0
+      },
 
-      AZIMUTH_P = 0.01, // 0.001,
-      AZIMUTH_I = 0.0,
-      AZIMUTH_D = 0.00005;
+      AZIMUTH_P = {
+        0.01,
+        0.01,
+        0,
+        0
+      },
+      AZIMUTH_I = {
+        0,
+        0,
+        0,
+        0
+      },
+      AZIMUTH_D = {
+        0.00005,
+        0.00005,
+        0,
+        0
+      };
 
   }
 }

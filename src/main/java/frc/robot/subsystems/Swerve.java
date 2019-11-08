@@ -14,22 +14,20 @@ public class Swerve extends SwerveDrive {
   public Swerve() {
     super(1, 1);
 
-    mModules = new HybridModule[2];
+    mModules = new HybridModule[4];
 
-    mModules[0] = new HybridModule(0, RobotMap.Ports.AZIMUTH_0, RobotMap.Ports.DRIVE_0, 0,
-        RobotMap.Values.MODULE_FORWARD_0, // Change
-        RobotMap.Values.AZIMUTH_P, RobotMap.Values.AZIMUTH_I, RobotMap.Values.AZIMUTH_D);
-    mModules[1] = new HybridModule(1, RobotMap.Ports.AZIMUTH_1, RobotMap.Ports.DRIVE_1, 1,
-        RobotMap.Values.MODULE_FORWARD_1, // Change
-        RobotMap.Values.AZIMUTH_P, RobotMap.Values.AZIMUTH_I, RobotMap.Values.AZIMUTH_D);
-    // mModules[2] = new ProtoModule(2, RobotMap.Ports.AZIMUTH_2,
-    // RobotMap.Ports.DRIVE_2, 2, RobotMap.Values.MODULE_FORWARD_2, //Change
-    // RobotMap.Values.AZIMUTH_P, RobotMap.Values.AZIMUTH_I,
-    // RobotMap.Values.AZIMUTH_D);
-    // mModules[3] = new ProtoModule(3, RobotMap.Ports.AZIMUTH_3,
-    // RobotMap.Ports.DRIVE_3, 3, RobotMap.Values.MODULE_FORWARD_3, //Change
-    // RobotMap.Values.AZIMUTH_P, RobotMap.Values.AZIMUTH_I,
-    // RobotMap.Values.AZIMUTH_D);
+    mModules[0] = new HybridModule(0, RobotMap.Ports.AZIMUTH[0], RobotMap.Ports.DRIVE[0], 0,
+        RobotMap.Values.MODULE_FORWARD[0], // Change
+        RobotMap.Values.AZIMUTH_P[0], RobotMap.Values.AZIMUTH_I[0], RobotMap.Values.AZIMUTH_D[0]);
+    mModules[1] = new HybridModule(1, RobotMap.Ports.AZIMUTH[1], RobotMap.Ports.DRIVE[1], 1,
+        RobotMap.Values.MODULE_FORWARD[1], // Change
+        RobotMap.Values.AZIMUTH_P[1], RobotMap.Values.AZIMUTH_I[1], RobotMap.Values.AZIMUTH_D[1]);
+    mModules[2] = new HybridModule(2, RobotMap.Ports.AZIMUTH[2], RobotMap.Ports.DRIVE[2], 2,
+        RobotMap.Values.MODULE_FORWARD[2], // Change
+        RobotMap.Values.AZIMUTH_P[2], RobotMap.Values.AZIMUTH_I[2], RobotMap.Values.AZIMUTH_D[2]);
+    mModules[3] = new HybridModule(3, RobotMap.Ports.AZIMUTH[3], RobotMap.Ports.DRIVE[3], 3,
+        RobotMap.Values.MODULE_FORWARD[3], // Change
+        RobotMap.Values.AZIMUTH_P[3], RobotMap.Values.AZIMUTH_I[3], RobotMap.Values.AZIMUTH_D[3]);
 
     mModules[0].invertAzimuth(true);
     //mModules[1].invertAzimuth(true);
@@ -47,7 +45,7 @@ public class Swerve extends SwerveDrive {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new SwerveDriveController());
+    if (!Robot.IS_TUNING) setDefaultCommand(new SwerveDriveController());
   }
 
 }

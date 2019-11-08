@@ -8,10 +8,11 @@ public class UpdateSwervePID {
 
   private double mLastP, mLastI, mLastD;
 
-  public UpdateSwervePID() {
-    mLastP = RobotMap.Values.AZIMUTH_P;
-    mLastI = RobotMap.Values.AZIMUTH_I;
-    mLastD = RobotMap.Values.AZIMUTH_D;
+  public UpdateSwervePID(int moduleID) {
+    
+    mLastP = RobotMap.Values.AZIMUTH_P[moduleID];
+    mLastI = RobotMap.Values.AZIMUTH_I[moduleID];
+    mLastD = RobotMap.Values.AZIMUTH_D[moduleID];
 
     SmartDashboard.putNumber("swerve/aziP", mLastP);
     SmartDashboard.putNumber("swerve/aziI", mLastI);
