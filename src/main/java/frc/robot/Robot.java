@@ -8,6 +8,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
@@ -25,7 +26,7 @@ public class Robot extends TimedRobot {
 
   public static final boolean IS_TUNING = true;
 
-  public static final int TUNING_ID = 0;
+  public static final int TUNING_ID = 3;
 
   public static Swerve mSwerve;
   public static OI mOi;
@@ -38,7 +39,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    if (IS_TUNING) mPidTuner = new UpdateSwervePID(0); // Set to tune front right module
+    if (IS_TUNING) mPidTuner = new UpdateSwervePID(TUNING_ID); // Set to tune front right module
 
     mRunner = new SpartanRunner(20);
 
@@ -62,6 +63,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    if (IS_TUNING) mPidTuner.update();
   }
 
   @Override
@@ -87,8 +89,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    //aaahhh.set(ControlMode.PercentOutput, Math.random());
     Scheduler.getInstance().run();
-    if (IS_TUNING) mPidTuner.update();
   }
 
   @Override

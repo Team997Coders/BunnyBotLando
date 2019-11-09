@@ -32,8 +32,8 @@ public class OI {
     if (Robot.IS_TUNING) {
       mA.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 0));
       mB.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 90));
-      mX.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 300));
-      mY.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 240));
+      mX.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 180));
+      mY.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 360));
     } else {
       
     }

@@ -29,7 +29,8 @@ public class Swerve extends SwerveDrive {
         RobotMap.Values.MODULE_FORWARD[3], // Change
         RobotMap.Values.AZIMUTH_P[3], RobotMap.Values.AZIMUTH_I[3], RobotMap.Values.AZIMUTH_D[3]);
 
-    mModules[0].invertAzimuth(true);
+    mModules[0].setTargetAngle(mModules[0].getAngle());
+    mModules[2].setTargetAngle(mModules[2].getAngle());
     //mModules[1].invertAzimuth(true);
 
     for (int i = 0; i < mModules.length; i++) {

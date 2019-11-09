@@ -28,11 +28,12 @@ public class UpdateSwervePID {
   public void update() {
     int a = (int)SmartDashboard.getNumber("swerve/pidSubmit", 0);
     if (a != 0) {
-    double p = SmartDashboard.getNumber("swerve/aziP", 0.0);
-    double i = SmartDashboard.getNumber("swerve/aziI", 0.0);
-    double d = SmartDashboard.getNumber("swerve/aziD", 0.0);
-    Robot.mSwerve.updateAzimuthPID(p, i, d);
-  }
+      SmartDashboard.putNumber("swerve/pidSubmit", 0);
+      double p = SmartDashboard.getNumber("swerve/aziP", 0.0);
+      double i = SmartDashboard.getNumber("swerve/aziI", 0.0);
+      double d = SmartDashboard.getNumber("swerve/aziD", 0.0);
+      Robot.mSwerve.updateAAHHH(Robot.TUNING_ID, p, i, d);
+    }
   }
 
 }
