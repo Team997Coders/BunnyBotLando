@@ -21,6 +21,7 @@ public class OI {
     gamepad = new Joystick(RobotMap.Ports.joystick);
   }
 
+  // Keep in mind that there will be 2 controllers, both of which will utilize the LeftY axis
   public double getLeftYaxis() {
     return gamepad.getRawAxis(RobotMap.Ports.leftYaxis);
   }
