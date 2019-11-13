@@ -24,7 +24,7 @@ import frc.robot.util.UpdateSwervePID;
 
 public class Robot extends TimedRobot {
 
-  public static final boolean IS_TUNING = true;
+  public static final boolean IS_TUNING = false;
 
   public static final int TUNING_ID = 0;
 

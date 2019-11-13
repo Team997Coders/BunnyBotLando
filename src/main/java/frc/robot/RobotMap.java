@@ -50,7 +50,7 @@ public class RobotMap {
         0.01,
         0.01,
         0.01,
-        0.01
+        0.02
       },
       AZIMUTH_I = {
         0,
