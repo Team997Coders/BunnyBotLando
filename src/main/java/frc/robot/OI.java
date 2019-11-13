@@ -7,11 +7,42 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.SetModuleAngle;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+
+  private Joystick gamepad;
+
+  private JoystickButton mA, mB, mX, mY;
+
+  public OI() {
+    gamepad = new Joystick(0);
+
+    mA = new JoystickButton(gamepad, 1);
+    mB = new JoystickButton(gamepad, 2);
+    mX = new JoystickButton(gamepad, 3);
+    mY = new JoystickButton(gamepad, 4);
+
+    if (Robot.IS_TUNING) {
+      mA.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 0));
+      mB.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 90));
+      mX.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 180));
+      mY.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 45));
+    } else {
+      
+    }
+  }
+
+  public double getAxis(int axis) {
+    return gamepad.getRawAxis(axis);
+  }
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
