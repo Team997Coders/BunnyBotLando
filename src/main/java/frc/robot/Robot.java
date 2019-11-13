@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
 
   public static final boolean IS_TUNING = true;
 
-  public static final int TUNING_ID = 3;
+  public static final int TUNING_ID = 0;
 
   public static Swerve mSwerve;
   public static OI mOi;

@@ -32,7 +32,7 @@ public class UpdateSwervePID {
       double p = SmartDashboard.getNumber("swerve/aziP", 0.0);
       double i = SmartDashboard.getNumber("swerve/aziI", 0.0);
       double d = SmartDashboard.getNumber("swerve/aziD", 0.0);
-      Robot.mSwerve.updateAAHHH(Robot.TUNING_ID, p, i, d);
+      Robot.mSwerve.updateAzimuthPID(Robot.TUNING_ID, p, i, d);
     }
   }
 

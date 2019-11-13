@@ -33,7 +33,7 @@ public class OI {
       mA.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 0));
       mB.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 90));
       mX.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 180));
-      mY.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 360));
+      mY.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 45));
     } else {
       
     }

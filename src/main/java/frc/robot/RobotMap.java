@@ -40,16 +40,16 @@ public class RobotMap {
     public static final double[]
 
       MODULE_FORWARD = {
-        4.67,
-        2.31,
-        1.63,
-        3.15
+        4.68,
+        3.03,
+        4.10,
+        3.17
       },
 
       AZIMUTH_P = {
-        0.00,
-        0.00,
-        0.00,
+        0.01,
+        0.01,
+        0.01,
         0.01
       },
       AZIMUTH_I = {
@@ -59,9 +59,9 @@ public class RobotMap {
         0
       },
       AZIMUTH_D = {
-        0.00000,
-        0.00000,
-        0.00000,
+        0.00005,
+        0.00005,
+        0.00005,
         0.00005
       };
 

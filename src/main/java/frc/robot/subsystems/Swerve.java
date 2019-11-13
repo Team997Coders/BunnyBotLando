@@ -1,18 +1,25 @@
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import org.team997coders.spartanlib.commands.UpdateModule;
 import org.team997coders.spartanlib.swerve.SwerveDrive;
 import org.team997coders.spartanlib.swerve.module.HybridModule;
 import org.team997coders.spartanlib.swerve.module.SwerveModule;
 
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.SwerveDriveController;
 
 public class Swerve extends SwerveDrive {
 
+  public AHRS gyro;
+
   public Swerve() {
     super(1, 1);
+
+    gyro = new AHRS(Port.kUSB);
 
     mModules = new HybridModule[4];
 
@@ -29,9 +36,10 @@ public class Swerve extends SwerveDrive {
         RobotMap.Values.MODULE_FORWARD[3], // Change
         RobotMap.Values.AZIMUTH_P[3], RobotMap.Values.AZIMUTH_I[3], RobotMap.Values.AZIMUTH_D[3]);
 
-    mModules[0].setTargetAngle(mModules[0].getAngle());
-    mModules[2].setTargetAngle(mModules[2].getAngle());
+    //mModules[0].setTargetAngle(mModules[0].getAngle());
+    //mModules[2].setTargetAngle(mModules[2].getAngle());
     //mModules[1].invertAzimuth(true);
+    mModules[1].invertDrive(true, true);
 
     for (int i = 0; i < mModules.length; i++) {
       Robot.mRunner.AddAction(new UpdateModule(mModules[i], this));
