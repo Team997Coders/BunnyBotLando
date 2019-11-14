@@ -13,23 +13,19 @@ public class SwerveDriveController extends Command {
 
   @Override
   protected void initialize() {
-    Robot.mSwerve.gyro.reset();
+    Robot.mSwerve.resetGyro();
   }
 
   @Override
   protected void execute() {
-
     double f = -Robot.mOi.getAxis(1);
     double s = Robot.mOi.getAxis(0);
     double r = Robot.mOi.getAxis(4);
 
-    double angle = -Robot.mSwerve.gyro.getYaw();
-    while (angle < 0) angle += 360;
-    while (angle >= 360) angle -= 360;
+    double angle = -Robot.mSwerve.getYaw();
 
     SwerveMixerData dat = Robot.mSwerve.getSwerveData(f, s, r, angle);
     Robot.mSwerve.setSwerveInput(dat);
-
   }
 
   @Override
