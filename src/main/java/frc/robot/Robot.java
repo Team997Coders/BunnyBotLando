@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import frc.robot.commands.ConveyorForward;
-//import frc.robot.commands.ConveryorBackward;
 import frc.robot.subsystems.ConveyorBelt;
 
 /**
@@ -24,7 +22,8 @@ import frc.robot.subsystems.ConveyorBelt;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ConveyorBelt conveyorBelt = new ConveyorBelt(); // Please initialize in roboInit()
+
+  public static ConveyorBelt mConveyorBelt;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -36,6 +35,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    mConveyorBelt = new ConveyorBelt();
+
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -52,6 +54,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    mConveyorBelt.updateSmartDashboard();
   }
 
   /**

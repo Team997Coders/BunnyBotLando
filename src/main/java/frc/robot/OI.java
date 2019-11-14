@@ -3,30 +3,26 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ConveyorBackward;
-import frc.robot.commands.ConveyorForward;
+import frc.robot.commands.ConveyorMove;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  
-  // TODO: Please assign your member variables a visibility
-  Joystick gamepad;
-  Button rightBumper;
-  Button leftBumper;
+
+  public Joystick gamepad;
+  private Button rightBumper, leftBumper;
   
   public OI(){
     
     gamepad = new Joystick(0);
     
-    rightBumper = new JoystickButton(gamepad, RobotMap.rightBumper);
-    leftBumper = new JoystickButton(gamepad, RobotMap.leftBumper);
+    rightBumper = new JoystickButton(gamepad, RobotMap.Ports.rightBumper);
+    leftBumper = new JoystickButton(gamepad, RobotMap.Ports.leftBumper);
     
-    rightBumper.whileHeld(new ConveyorForward());
-    leftBumper.whileHeld(new ConveyorBackward());
-    
+    rightBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeOut));
+    leftBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeIn));
   }
   
   //// CREATING BUTTONS

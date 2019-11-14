@@ -12,34 +12,20 @@ import frc.robot.RobotMap;
 public class ConveyorBelt extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  
-  // TODO: Make this a private variable
-  VictorSPX beltyBoi;
+
+  private VictorSPX beltyBoi;
 
   /**
    * TODO: Could you add some current limits. This is an intake
    * motor and we tend to burn them often.
    */
   public ConveyorBelt(){
-    beltyBoi = new VictorSPX(RobotMap.beltyBoi);
+    beltyBoi = new VictorSPX(RobotMap.Ports.beltyBoi);
   }
 
-  /**
-   * TODO: Please just make one function that takes a parameter
-   * for speed. Making 3 functions that all do relatively the same thing
-   * but a bit different is excessive.
-   */
-  public void ConveyorForward(){
-    beltyBoi.set(ControlMode.PercentOutput, .5);
-  }
+  public void setSpeed(double speed) { beltyBoi.set(ControlMode.PercentOutput, speed); }
 
-  public void ConveyorBackward(){
-    beltyBoi.set(ControlMode.PercentOutput, -.5);
-  }
-
-  public void ConveyorStop(){
-    beltyBoi.set(ControlMode.PercentOutput, 0);
-  }
+  public void updateSmartDashboard() { /* TODO: Do something in here if we add an encoder for something */ }
   
   @Override
   public void initDefaultCommand() {
