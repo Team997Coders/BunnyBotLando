@@ -7,6 +7,10 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
 
 import edu.wpi.first.wpilibj.TimedRobot;
