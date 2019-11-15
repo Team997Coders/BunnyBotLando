@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
+  // TODO: Make private
   Joystick gamepad;
 
   public OI() {
