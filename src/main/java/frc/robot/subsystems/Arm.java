@@ -26,6 +26,8 @@ public class Arm extends Subsystem {
   public Arm() {
     // TODO: Add current limits. Also use limit switches
     armMotor = new WPI_VictorSPX(RobotMap.Ports.armMotor);
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    
     grabberSolenoid = new DoubleSolenoid(RobotMap.Ports.grabberSolenoidPort1, RobotMap.Ports.grabberSolenoidPort2); 
   }
 
@@ -36,25 +38,28 @@ public class Arm extends Subsystem {
   }
 
   public double getEncoderTicks(){
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     return armMotor.getSelectedSensorPosition(0);
   }
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
-
+  // TODO: Name this like grab or something. This was a big problem last season when we couldn't tell what the function did because the name was pointless
   public void launchGrabber(){
     grabberSolenoid.set(DoubleSolenoid.Value.kForward);
     grabberEjected = true;
   }
+  
+  // TODO: Name this release
   public void stopGrabber(){
     grabberSolenoid.set(DoubleSolenoid.Value.kOff);
+    grabberEjected = false;
   }
 
   public void updateSmartDashBoard(){
     SmartDashboard.putBoolean("Robot Grabber Deployed", grabberEjected);
+  }
+  
+  @Override
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 }
