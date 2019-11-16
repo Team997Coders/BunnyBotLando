@@ -60,6 +60,6 @@ public class Arm extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    // TODO: setDefaultCommand(new MySpecialCommand());
   }
 }
