@@ -9,10 +9,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * TODO: make a description
  */
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+//subsystem for anything and everything related to the arm on the robot
+//the arm is the big one that moves up and down
 public class Arm extends Subsystem {
 
-  // need fxs for getting encoder values
-  WPI_VictorSPX armMotor; // TODO: Make private
+  private WPI_VictorSPX armMotor;
 
   private DoubleSolenoid grabberSolenoid;
 
@@ -24,12 +29,15 @@ public class Arm extends Subsystem {
     grabberSolenoid = new DoubleSolenoid(RobotMap.Ports.grabberSolenoidPort1, RobotMap.Ports.grabberSolenoidPort2); 
   }
 
-  // TODO: Rename this to like 'setSpeed' or something because move
-  //   doesn't tell you if its speed or position
-  public void move(double speed) {
+  public void setSpeed(double speed) {
     if (Math.abs(speed) > 0.05) {
       armMotor.set(speed);
     }
+  }
+
+  public double getEncoderTicks(){
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+    return armMotor.getSelectedSensorPosition(0);
   }
 
   @Override
