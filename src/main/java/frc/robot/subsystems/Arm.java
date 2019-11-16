@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 //the arm is the big one that moves up and down
 public class Arm extends Subsystem {
 
-  // TODO: need fxs for getting encoder values
   private WPI_VictorSPX armMotor;
 
   public Arm() {
@@ -24,6 +23,11 @@ public class Arm extends Subsystem {
     if (Math.abs(speed) > 0.05) {
       armMotor.set(speed);
     }
+  }
+
+  public double getEncoderTicks(){
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+    return armMotor.getSelectedSensorPosition(0);
   }
 
   @Override
