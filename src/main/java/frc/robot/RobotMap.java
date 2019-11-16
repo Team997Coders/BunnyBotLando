@@ -28,6 +28,8 @@ public class RobotMap {
     public final static int
     armMotor = 0, //Get real port
     joystick = 0, //Get real port
-    leftYaxis = 1;
+    leftYaxis = 1,
+    grabberSolenoidPort1 = 0, //TODO: Get real port
+    grabberSolenoidPort2 = 0; //TODO: Get real port
   }
 }
