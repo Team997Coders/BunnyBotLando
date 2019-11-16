@@ -17,8 +17,9 @@ public class ConveyorBelt extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  //private 
+  //private. Use a WPI_VictorSPX
   private VictorSPX beltyBoi;
+  // What the hell is this??
   private double maxSpeed = 0.7424000131081202983048019872310293848957012893651782460321897413892065012837;
   
   private NetworkTable table;
@@ -28,24 +29,24 @@ public class ConveyorBelt extends Subsystem {
    */
   public ConveyorBelt(){
     beltyBoi = new VictorSPX(RobotMap.Ports.beltyBoi);
+    beltyBoi.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
   }
 
   public void setSpeed(double speed) {
 
-    if(speed > maxSpeed){
+    if(speed > maxSpeed){ // Need absolute value of speed
         speed = maxSpeed;
     }
 
      beltyBoi.set(ControlMode.PercentOutput, speed);
-     
   }
+  
   public double getEncoderTicks(){
-    beltyBoi.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,0);
     return beltyBoi.getSelectedSensorPosition(0);
   }
+  
   public void updateSmartDashboard() { 
-    
-    table.getEntry("Conveyor Belt Ticks").setDouble(getEncoderTicks());
+    table.getEntry("Conveyor Belt Ticks").setDouble(getEncoderTicks()); // Jesus please just use the SmartDashboard class
   }
   
   @Override
