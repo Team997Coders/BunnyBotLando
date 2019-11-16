@@ -27,7 +27,7 @@ public class MoveArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.arm.move(Robot.m_oi.getLeftYaxis());
+    Robot.arm.setSpeed(Robot.m_oi.getLeftYaxis());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +39,7 @@ public class MoveArm extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.arm.move(0);
+    Robot.arm.setSpeed(0);
   }
 
   // Called when another command which requires one or more of the same

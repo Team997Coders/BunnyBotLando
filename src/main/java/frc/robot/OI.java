@@ -15,8 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
-  // TODO: Make private
-  Joystick gamepad;
+  private Joystick gamepad;
 
   public OI() {
     gamepad = new Joystick(RobotMap.Ports.joystick);
