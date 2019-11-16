@@ -3,6 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.SetModuleAngle;
+import frc.robot.commands.ZeroSwerve;
+import org.team997coders.spartanlib.math.MathUtils;
 
 public class OI {
 
@@ -24,12 +26,12 @@ public class OI {
       mX.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 180));
       mY.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 45));
     } else {
-      
+      mA.whenPressed(new ZeroSwerve());
     }
   }
 
   public double getAxis(int axis) {
-    return gamepad.getRawAxis(axis);
+    return MathUtils.deadband(gamepad.getRawAxis(axis), 0.05);
   }
 
   //// CREATING BUTTONS

@@ -40,6 +40,8 @@ public class Swerve extends SwerveDrive {
     mModules[1].invertDrive(true, true);
 
     for (int i = 0; i < mModules.length; i++) {
+      //mModules[i].invertAzimuth(true);
+      mModules[i].setDriveBrakeMode(true);
       Robot.mRunner.AddAction(new UpdateModule(mModules[i], this));
     }
   }
