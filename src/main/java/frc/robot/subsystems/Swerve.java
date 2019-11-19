@@ -25,22 +25,17 @@ public class Swerve extends SwerveDrive {
     mModules = new MerlinModule[4];
 
     mModules[0] = new MerlinModule(0, RobotMap.Ports.AZIMUTH[0], RobotMap.Ports.DRIVE[0], 0,
-        RobotMap.Values.MODULE_FORWARD[0], // Change
-        RobotMap.Values.AZIMUTH_P[0], RobotMap.Values.AZIMUTH_I[0], RobotMap.Values.AZIMUTH_D[0]);
+        RobotMap.Values.MODULE_FORWARD[0], RobotMap.Values.AZIMUTH_CONSTANTS[0]);
     mModules[1] = new MerlinModule(1, RobotMap.Ports.AZIMUTH[1], RobotMap.Ports.DRIVE[1], 1,
-        RobotMap.Values.MODULE_FORWARD[1], // Change
-        RobotMap.Values.AZIMUTH_P[1], RobotMap.Values.AZIMUTH_I[1], RobotMap.Values.AZIMUTH_D[1]);
+        RobotMap.Values.MODULE_FORWARD[1], RobotMap.Values.AZIMUTH_CONSTANTS[1]);
     mModules[2] = new MerlinModule(2, RobotMap.Ports.AZIMUTH[2], RobotMap.Ports.DRIVE[2], 2,
-        RobotMap.Values.MODULE_FORWARD[2], // Change
-        RobotMap.Values.AZIMUTH_P[2], RobotMap.Values.AZIMUTH_I[2], RobotMap.Values.AZIMUTH_D[2]);
+        RobotMap.Values.MODULE_FORWARD[2], RobotMap.Values.AZIMUTH_CONSTANTS[2]);
     mModules[3] = new MerlinModule(3, RobotMap.Ports.AZIMUTH[3], RobotMap.Ports.DRIVE[3], 3,
-        RobotMap.Values.MODULE_FORWARD[3], // Change
-        RobotMap.Values.AZIMUTH_P[3], RobotMap.Values.AZIMUTH_I[3], RobotMap.Values.AZIMUTH_D[3]);
+        RobotMap.Values.MODULE_FORWARD[3], RobotMap.Values.AZIMUTH_CONSTANTS[3]);
 
     mModules[1].invertDrive(true, true);
 
     for (int i = 0; i < mModules.length; i++) {
-      //mModules[i].invertAzimuth(true);
       mModules[i].setDriveBrakeMode(true);
       Robot.mRunner.AddAction(new UpdateModule(mModules[i], this));
     }
