@@ -1,14 +1,17 @@
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import org.team997coders.spartanlib.commands.UpdateModule;
+import org.team997coders.spartanlib.math.Vector2;
 import org.team997coders.spartanlib.swerve.SwerveDrive;
 import org.team997coders.spartanlib.swerve.module.MerlinModule;
 import org.team997coders.spartanlib.swerve.module.SwerveModule;
 
 import edu.wpi.first.wpilibj.SerialPort.Port;
-
+import edu.wpi.first.wpilibj.drive.Vector2d;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.SwerveDriveController;
@@ -41,8 +44,25 @@ public class Swerve extends SwerveDrive {
     }
   }
 
+  public Vector2 getSpeedVector() {
+    ArrayList<Vector2> vects = new ArrayList<Vector2>();
+    for (int i = 0; i < mModules.length; i++) {
+      vects.add(mModules[i].getSpeedVector());
+    }
+
+    Vector2 sum = new Vector2(0, 0);
+
+    vects.forEach((vect) -> {
+      sum.x += vect.x;
+      sum.y += vect.y;
+    });
+
+    Vector2 avg = new Vector2(sum.x / vects.size(), sum.y / vects.size());
+    return avg;
+  }
+
   public void updateSmartDashboard() {
-    for (SwerveModule mod : mModules) {
+    for (SwerveModule<Object, Object, Object> mod : mModules) {
       mod.updateSmartDashboard();
     }
   }
