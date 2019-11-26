@@ -20,9 +20,8 @@ public class ConveyorBelt extends Subsystem {
   //private. Use a WPI_VictorSPX
   private VictorSPX beltyBoi;
   // What the hell is this??
-  private double maxSpeed = 0.7424000131081202983048019872310293848957012893651782460321897413892065012837;
-  
-  private NetworkTable table;
+  private double maxSpeed = 0.7;
+
   /**
    * DONE:---TODO: Could you add some current limits. This is an intake
    * motor and we tend to burn them often.
@@ -30,6 +29,7 @@ public class ConveyorBelt extends Subsystem {
   public ConveyorBelt(){
     beltyBoi = new VictorSPX(RobotMap.Ports.beltyBoi);
     beltyBoi.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    
   }
 
   public void setSpeed(double speed) {
@@ -46,7 +46,7 @@ public class ConveyorBelt extends Subsystem {
   }
   
   public void updateSmartDashboard() { 
-    table.getEntry("Conveyor Belt Ticks").setDouble(getEncoderTicks()); // Jesus please just use the SmartDashboard class
+    SmartDashboard.putNumber("Conveyor Belt Ticks", getEncoderTicks()); // Jesus please just use the SmartDashboard class
   }
   
   @Override
