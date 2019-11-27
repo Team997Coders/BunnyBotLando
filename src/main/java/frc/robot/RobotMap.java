@@ -19,6 +19,12 @@ public class RobotMap {
   // public static int leftMotor = 1;
   // public static int rightMotor = 2;
 
+  public static class Speeds {
+    public static final double
+      intakeIn = 0.5,
+      intakeOut = -0.5;
+  }
+
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
@@ -30,6 +36,9 @@ public class RobotMap {
     joystick = 0, //Get real port
     leftYaxis = 1,
     grabberSolenoidPort1 = 0, //TODO: Get real port
-    grabberSolenoidPort2 = 0; //TODO: Get real port
+    grabberSolenoidPort2 = 0, //TODO: Get real port
+    beltyBoi = 42069, //TODO: reeeee at Emi for acutal port
+    rightBumper = 5,
+    leftBumper = 4;
   }
 }

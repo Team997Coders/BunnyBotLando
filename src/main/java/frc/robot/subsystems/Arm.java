@@ -5,13 +5,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.MoveArm;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-/**
- * TODO: make a description
- */
-import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 //subsystem for anything and everything related to the arm on the robot
 //the arm is the big one that moves up and down
@@ -22,12 +19,12 @@ public class Arm extends Subsystem {
   private DoubleSolenoid grabberSolenoid;
 
   public boolean grabberEjected = false;
-
+  public double peakOutput = .7;
   public Arm() {
-    // TODO: Add current limits. Also use limit switches
     armMotor = new WPI_VictorSPX(RobotMap.Ports.armMotor);
     armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     
+    armMotor.configClosedLoopPeakOutput(0, .7);
     grabberSolenoid = new DoubleSolenoid(RobotMap.Ports.grabberSolenoidPort1, RobotMap.Ports.grabberSolenoidPort2); 
   }
 
@@ -41,14 +38,12 @@ public class Arm extends Subsystem {
     return armMotor.getSelectedSensorPosition(0);
   }
 
-  // TODO: Name this like grab or something. This was a big problem last season when we couldn't tell what the function did because the name was pointless
-  public void launchGrabber(){
+  public void grab(){
     grabberSolenoid.set(DoubleSolenoid.Value.kForward);
     grabberEjected = true;
   }
   
-  // TODO: Name this release
-  public void stopGrabber(){
+  public void ungrab(){
     grabberSolenoid.set(DoubleSolenoid.Value.kOff);
     grabberEjected = false;
   }
@@ -60,6 +55,7 @@ public class Arm extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // TODO: setDefaultCommand(new MySpecialCommand());
+    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new MoveArm());
   }
 }

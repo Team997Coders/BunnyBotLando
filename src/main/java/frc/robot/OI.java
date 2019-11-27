@@ -1,13 +1,9 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ConveyorMove;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,17 +11,27 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
-  private Joystick gamepad;
-
-  public OI() {
-    gamepad = new Joystick(RobotMap.Ports.joystick);
+  public Joystick gamepad;
+  private Button rightBumper, leftBumper;
+  
+  
+  public OI(){
+    
+    gamepad = new Joystick(0);
+    
+    rightBumper = new JoystickButton(gamepad, RobotMap.Ports.rightBumper);
+    leftBumper = new JoystickButton(gamepad, RobotMap.Ports.leftBumper);
+    
+    rightBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeOut));
+    leftBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeIn));
   }
 
   // Keep in mind that there will be 2 controllers, both of which will utilize the LeftY axis
   public double getLeftYaxis() {
     return gamepad.getRawAxis(RobotMap.Ports.leftYaxis);
   }
-
+  
+  
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -33,7 +39,6 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
-
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
