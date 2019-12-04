@@ -37,6 +37,11 @@ public class RobotMap {
 
   public static class Values {
 
+    public static final double
+      VISION_TOLERANCE = 0.03, //tolerance for vision target commands
+      VISION_TARGET_SIZE = 1.0,
+      VISION_P = 1.5; //larger than normal P-values since vison's error will be at maximum 1.
+
     public static final double[]
 
       MODULE_FORWARD = {

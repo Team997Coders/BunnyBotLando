@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.SetModuleAngle;
+import org.team997coders.spartanlib.math.MathUtils;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -40,7 +41,8 @@ public class OI {
   }
 
   public double getAxis(int axis) {
-    return gamepad.getRawAxis(axis);
+    return MathUtils.deadband(gamepad.getRawAxis(axis), 0.05);
+    //@Hunter Why is the swerve class in spartanLib deadbanded, it'll heck up our PID loops
   }
 
   //// CREATING BUTTONS

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
+import org.team997coders.spartanlib.limelight.*;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
   public static Swerve mSwerve;
   public static OI mOi;
   public static SpartanRunner mRunner;
+  public static LimeLight mLimeLight;
   private UpdateSwervePID mPidTuner = null;
 
   Command mAutonomousCommand;
@@ -44,6 +46,8 @@ public class Robot extends TimedRobot {
     mRunner = new SpartanRunner(20);
 
     mSwerve = new Swerve();
+
+    mLimeLight = new LimeLight();
 
     mOi = new OI();
     mChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
