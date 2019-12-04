@@ -28,9 +28,11 @@ public class SimpleDriveToTarget extends Command {
   @Override
   protected void execute() {
     if(Robot.mLimeLight.getDouble(LimeLight.TARGET_VISIBLE, 0) == 1) {
-      double error = (RobotMap.Values.VISION_TARGET_SIZE - Robot.mLimeLight.getDouble(LimeLight.TARGET_AREA, 0)); 
-      double output = error * RobotMap.Values.VISION_P; //janky P-loop for a janky command >.>
-      SwerveMixerData dat = Robot.mSwerve.getSwerveData(output, 0, 0);
+      double forwardError = (RobotMap.Values.VISION_TARGET_SIZE - Robot.mLimeLight.getDouble(LimeLight.TARGET_AREA, 0)); 
+      double forwardOutput = forwardError * RobotMap.Values.VISION_FORWARD_P; //janky P-loop for a janky command >.>
+      double strafeError = Robot.mLimeLight.getDouble(LimeLight.TARGET_X, 0);
+      double strafeOutput = strafeError * RobotMap.Values.VISION_STRAFE_P;
+      SwerveMixerData dat = Robot.mSwerve.getSwerveData(forwardOutput, strafeOutput, 0);
       Robot.mSwerve.setSwerveInput(dat);
     }
   }
