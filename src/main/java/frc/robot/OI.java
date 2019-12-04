@@ -42,7 +42,6 @@ public class OI {
 
   public double getAxis(int axis) {
     return MathUtils.deadband(gamepad.getRawAxis(axis), 0.05);
-    //@Hunter Why is the swerve class in spartanLib deadbanded, it'll heck up our PID loops
   }
 
   //// CREATING BUTTONS
