@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -14,14 +15,15 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 //the arm is the big one that moves up and down
 public class Arm extends Subsystem {
 
-  private WPI_VictorSPX armMotor;
+  private WPI_TalonSRX armMotor;
 
   private DoubleSolenoid grabberSolenoid;
 
   public boolean grabberEjected = false;
   public double peakOutput = .7;
+
   public Arm() {
-    armMotor = new WPI_VictorSPX(RobotMap.Ports.armMotor);
+    armMotor = new WPI_TalonSRX(RobotMap.Ports.armMotor);
     armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     
     armMotor.configClosedLoopPeakOutput(0, .7);
@@ -48,14 +50,12 @@ public class Arm extends Subsystem {
     grabberEjected = false;
   }
 
-  public void updateSmartDashBoard(){
+  public void updateSmartDashboard(){
     SmartDashboard.putBoolean("Robot Grabber Deployed", grabberEjected);
   }
   
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new MoveArm());
   }
 }
