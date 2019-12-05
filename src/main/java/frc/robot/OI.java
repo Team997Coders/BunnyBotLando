@@ -2,8 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.SetModuleAngle;
-import frc.robot.commands.ZeroSwerve;
+import frc.robot.commands.drive.SetModuleAngle;
+import frc.robot.commands.drive.ZeroSwerve;
 import org.team997coders.spartanlib.math.MathUtils;
 
 public class OI {

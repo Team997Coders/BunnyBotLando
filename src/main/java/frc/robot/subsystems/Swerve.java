@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.drive.Vector2d;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.SwerveDriveController;
+import frc.robot.commands.drive.SwerveDriveController;
 
 public class Swerve extends SwerveDrive {
 
