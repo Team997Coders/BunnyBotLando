@@ -30,10 +30,10 @@ public class RobotMap {
     public static final double[]
 
       MODULE_FORWARD = {
-        4.68,
-        3.03,
-        3.63,
-        3.17
+        1.96,
+        2.37,
+        4.06,
+        0.96
       },
 
       AZIMUTH_P = {
@@ -59,9 +59,9 @@ public class RobotMap {
     
       AZIMUTH_CONSTANTS = {
         new PIDConstants(0.01, 0.0, 0.00005),
-        new PIDConstants(0.017, 0.1, 0.45),
-        new PIDConstants(0.016, 0.0, 0.2),
-        new PIDConstants(0.015, 0.0001, 0.3)
+        new PIDConstants(/*0.017*/0.01, /*0.1*/0.0, /*0.45*/0.0),
+        new PIDConstants(0.01, 0.0, 0.2),
+        new PIDConstants(/*0.015*/0.01, /*0.0001*/0.0, /*0.3*/0.0)
       },
 
       DRIVE_CONSTANTS = {

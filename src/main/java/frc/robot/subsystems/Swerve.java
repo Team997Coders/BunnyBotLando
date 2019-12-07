@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import com.kauailabs.navx.frc.AHRS;
 
 import org.team997coders.spartanlib.commands.UpdateModule;
+import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
 import org.team997coders.spartanlib.math.Vector2;
 import org.team997coders.spartanlib.swerve.SwerveDrive;
-import org.team997coders.spartanlib.swerve.module.MerlinModule;
+import org.team997coders.spartanlib.swerve.module.TorqueModule;
 import org.team997coders.spartanlib.swerve.module.SwerveModule;
 
 import edu.wpi.first.wpilibj.SerialPort.Port;
@@ -25,22 +26,25 @@ public class Swerve extends SwerveDrive {
 
     mGyro = new AHRS(Port.kUSB);
 
-    mModules = new MerlinModule[4];
+    mModules = new TorqueModule[4];
 
-    mModules[0] = new MerlinModule(0, RobotMap.Ports.AZIMUTH[0], RobotMap.Ports.DRIVE[0], 0,
-        RobotMap.Values.MODULE_FORWARD[0], RobotMap.Values.AZIMUTH_CONSTANTS[0]);
-    mModules[1] = new MerlinModule(1, RobotMap.Ports.AZIMUTH[1], RobotMap.Ports.DRIVE[1], 1,
-        RobotMap.Values.MODULE_FORWARD[1], RobotMap.Values.AZIMUTH_CONSTANTS[1]);
-    mModules[2] = new MerlinModule(2, RobotMap.Ports.AZIMUTH[2], RobotMap.Ports.DRIVE[2], 2,
-        RobotMap.Values.MODULE_FORWARD[2], RobotMap.Values.AZIMUTH_CONSTANTS[2]);
-    mModules[3] = new MerlinModule(3, RobotMap.Ports.AZIMUTH[3], RobotMap.Ports.DRIVE[3], 3,
-        RobotMap.Values.MODULE_FORWARD[3], RobotMap.Values.AZIMUTH_CONSTANTS[3]);
+    mModules[0] = new TorqueModule(0, RobotMap.Ports.AZIMUTH[0], RobotMap.Ports.DRIVE[0], 0,
+        RobotMap.Values.MODULE_FORWARD[0], RobotMap.Values.AZIMUTH_CONSTANTS[0], RobotMap.Values.DRIVE_CONSTANTS[0]);
+    mModules[1] = new TorqueModule(1, RobotMap.Ports.AZIMUTH[1], RobotMap.Ports.DRIVE[1], 1,
+        RobotMap.Values.MODULE_FORWARD[1], RobotMap.Values.AZIMUTH_CONSTANTS[1], RobotMap.Values.DRIVE_CONSTANTS[1]);
+    mModules[2] = new TorqueModule(2, RobotMap.Ports.AZIMUTH[2], RobotMap.Ports.DRIVE[2], 2,
+        RobotMap.Values.MODULE_FORWARD[2], RobotMap.Values.AZIMUTH_CONSTANTS[2], RobotMap.Values.DRIVE_CONSTANTS[2]);
+    mModules[3] = new TorqueModule(3, RobotMap.Ports.AZIMUTH[3], RobotMap.Ports.DRIVE[3], 3,
+        RobotMap.Values.MODULE_FORWARD[3], RobotMap.Values.AZIMUTH_CONSTANTS[3], RobotMap.Values.DRIVE_CONSTANTS[3]);
 
     mModules[1].invertDrive(true, true);
+    mModules[3].invertDrive(true, true);
 
     for (int i = 0; i < mModules.length; i++) {
       mModules[i].setDriveBrakeMode(true);
+      SpartanRunner.LockThread();
       Robot.mRunner.AddAction(new UpdateModule(mModules[i], this));
+      SpartanRunner.UnlockThread();
     }
   }
 
