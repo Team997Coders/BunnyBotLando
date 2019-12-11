@@ -27,8 +27,9 @@ public class Arm extends Subsystem {
   public Arm() {
     armMotor = new TalonSRX(RobotMap.Ports.armMotor);
     armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    
-    armMotor.configClosedLoopPeakOutput(0, .7);
+    zeroEncoderTicks();
+    //armMotor.configClosedLoopPeakOutput(0, .7);
+
     grabberSolenoid = new DoubleSolenoid(RobotMap.Ports.grabberSolenoidPort1, RobotMap.Ports.grabberSolenoidPort2); 
 
     sensorCollection = new SensorCollection(armMotor);
@@ -49,6 +50,7 @@ public class Arm extends Subsystem {
   }
 
   public void zeroEncoderTicks() {
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     armMotor.setSelectedSensorPosition(0, 0, 10);
   }
 
@@ -63,7 +65,8 @@ public class Arm extends Subsystem {
   }
 
   public void updateSmartDashboard(){
-    SmartDashboard.putBoolean("Robot Grabber Deployed", grabberEjected);
+    SmartDashboard.putBoolean("Arm/Grabber Deployed", grabberEjected);
+    SmartDashboard.putNumber("Arm/Encoder Val", getEncoderTicks());
   }
   
   @Override
