@@ -37,7 +37,14 @@ public class RobotMap {
 
   public static class Values {
 
-    public static final double[]
+    public static double
+    
+      // Despite the fact that they are named up and down, up is sorta up and down is to the side and down
+      ARM_UP = 0.0,
+      ARM_DOWN = 0.0,
+      ARM_DEGREES_RANGE = 110;
+
+    public static double[]
 
       MODULE_FORWARD = {
         1.96,
@@ -93,6 +100,7 @@ public class RobotMap {
     public static final double
 
       INTAKE_SPEED_IN = 0.5,
-      INTAKE_SPEED_OUT = -0.5;
+      INTAKE_SPEED_OUT = -0.5,
+      ARM_SPEED_MAX = 0.3;
   }
 }

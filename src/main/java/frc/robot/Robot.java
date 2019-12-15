@@ -1,5 +1,8 @@
 package frc.robot;
 
+import java.io.IOException;
+import java.lang.reflect.Field;
+
 import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -8,56 +11,60 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.AutoDoNothing;
+import frc.robot.commands.auto.routines.AutoDoNothing;
 import frc.robot.subsystems.Swerve;
+import frc.robot.util.ConstantsManager;
 import frc.robot.util.UpdateSwervePID;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.ConveyorBelt;
+import frc.robot.subsystems.Intake;
 
 public class Robot extends TimedRobot {
 
-  public static ConveyorBelt conveyorBelt;
-  public static Arm arm;
-  public static OI m_oi;
-
+  // Tuning Stuff
   public static final boolean IS_TUNING = true;
-
   public static final int TUNING_ID = 0;
 
+  // Subsystems
+  public static Intake mIntake;
+  public static Arm mArm;
   public static Swerve mSwerve;
   public static OI mOi;
   public static SpartanRunner mRunner;
   private UpdateSwervePID mPidTuner = null;
 
-  Command mAutonomousCommand;
-  SendableChooser<Command> mChooser = new SendableChooser<>();
+  private Command mAutonomousCommand;
+  private SendableChooser<Command> mChooser = new SendableChooser<>();
 
   @Override
   public void robotInit() {
+
+    try { ConstantsManager.Init(); }
+    catch (IOException e) { e.printStackTrace(); }
 
     if (IS_TUNING) mPidTuner = new UpdateSwervePID(TUNING_ID); // Set to tune front right module
 
     mRunner = new SpartanRunner(20);
     mSwerve = new Swerve();
-    conveyorBelt = new ConveyorBelt();
-    arm = new Arm();
+    mIntake = new Intake();
+    mArm = new Arm();
 
     mOi = new OI();
+
     mChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
-    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", mChooser);
+
+    displayConstants();
+    //displayConstants(RobotMap.class, "");
   }
   
   @Override
   public void robotPeriodic() {
-    mSwerve.updateSmartDashboard();
-    conveyorBelt.updateSmartDashboard();
-    arm.updateSmartDashboard();
+    updateSmartDashboard();
   }
 
   @Override
   public void disabledInit() {
+    if (ConstantsManager.hasInit) ConstantsManager.SaveData();
   }
 
   @Override
@@ -73,6 +80,8 @@ public class Robot extends TimedRobot {
     if (mAutonomousCommand != null) {
       mAutonomousCommand.start();
     }
+
+    if (ConstantsManager.hasInit) ConstantsManager.LoadData();
   }
 
   @Override
@@ -85,6 +94,8 @@ public class Robot extends TimedRobot {
     if (mAutonomousCommand != null) {
       mAutonomousCommand.cancel();
     }
+
+    if (ConstantsManager.hasInit) ConstantsManager.LoadData();
   }
 
   @Override
@@ -93,7 +104,30 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void testPeriodic() {
+  public void testPeriodic() { }
+
+  public void updateSmartDashboard() {
+    mSwerve.updateSmartDashboard();
+    mIntake.updateSmartDashboard();
+    mArm.updateSmartDashboard();
   }
+
+  public void displayConstants() {
+    // TODO: Fill this with the constants until I can create the automatic one
+  }
+
+  /*public void displayConstants(Class cls, String parent) {
+    for (Field f: cls.getFields()) {
+      if (f.getType() == Class.class) {
+        displayConstants(f.getClass(), parent + cls.getName() + "/");
+      } else {
+        if (f.getType() == double.class || f.getType() == int.class || f.getType() == String.class || f.getType() == boolean.class) {
+
+        } else if (f.getType() == double[].class || f.getType() == int[].class) {
+          
+        }
+      }
+    }
+  }*/
 
 }

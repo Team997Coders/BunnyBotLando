@@ -10,13 +10,13 @@ import frc.robot.RobotMap;
 /**
  * The Convyer Belt is attached to the arm and is used to pick up bunnies during the game. 
  */
-public class ConveyorBelt extends Subsystem {
+public class Intake extends Subsystem {
 
   //private. Use a WPI_VictorSPX
   private VictorSPX beltyBoi;
   private double maxOutput = 0.7;
 
-  public ConveyorBelt(){
+  public Intake(){
     beltyBoi = new VictorSPX(RobotMap.Ports.INTAKE_VICTOR);
     beltyBoi.configPeakOutputForward(maxOutput);
   }

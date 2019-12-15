@@ -12,7 +12,6 @@ import org.team997coders.spartanlib.swerve.module.TorqueModule;
 import org.team997coders.spartanlib.swerve.module.SwerveModule;
 
 import edu.wpi.first.wpilibj.SerialPort.Port;
-import edu.wpi.first.wpilibj.drive.Vector2d;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive.SwerveDriveController;

@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.MoveArm;
+import frc.robot.commands.arm.MoveArm;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -25,10 +25,9 @@ public class Arm extends Subsystem {
   public double peakOutput = .7;
 
   public Arm() {
+
     armMotor = new TalonSRX(RobotMap.Ports.ARM_TALON);
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    zeroEncoderTicks();
-    //armMotor.configClosedLoopPeakOutput(0, .7);
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 10);
 
     grabberSolenoid = new DoubleSolenoid(RobotMap.Ports.GRABBER_SOLENOID_A, RobotMap.Ports.GRABBER_SOLENOID_B); 
 
@@ -41,17 +40,21 @@ public class Arm extends Subsystem {
     }
   }
 
+  public void setAngle(double angle) {
+    double encoderRange = RobotMap.Values.ARM_DOWN - RobotMap.Values.ARM_UP;
+    armMotor.set(ControlMode.Position, encoderRange * (angle / RobotMap.Values.ARM_DEGREES_RANGE)); // TODO: definitely change
+  }
+
   public boolean getTopSwitch() {
     return sensorCollection.isFwdLimitSwitchClosed();
   }
 
-  public double getEncoderTicks(){
-    return armMotor.getSelectedSensorPosition(0);
+  public double getAngle() {
+    return RobotMap.Values.ARM_DEGREES_RANGE * (getEncoderTicks() / (RobotMap.Values.ARM_DOWN - RobotMap.Values.ARM_UP/* This part is gonna change */));
   }
 
-  public void zeroEncoderTicks() {
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    armMotor.setSelectedSensorPosition(0, 0, 10);
+  public double getEncoderTicks(){
+    return armMotor.getSelectedSensorPosition(0);
   }
 
   public void grab(){
@@ -60,7 +63,7 @@ public class Arm extends Subsystem {
   }
   
   public void ungrab(){
-    grabberSolenoid.set(DoubleSolenoid.Value.kOff);
+    grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     grabberEjected = false;
   }
 
