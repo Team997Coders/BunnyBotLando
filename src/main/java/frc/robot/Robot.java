@@ -1,6 +1,5 @@
 package frc.robot;
 
-//test comment 2
 import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -8,11 +7,18 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.subsystems.Swerve;
 import frc.robot.util.UpdateSwervePID;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ConveyorBelt;
 
 public class Robot extends TimedRobot {
+
+  public static ConveyorBelt conveyorBelt;
+  public static Arm arm;
+  public static OI m_oi;
 
   public static final boolean IS_TUNING = true;
 
@@ -32,11 +38,13 @@ public class Robot extends TimedRobot {
     if (IS_TUNING) mPidTuner = new UpdateSwervePID(TUNING_ID); // Set to tune front right module
 
     mRunner = new SpartanRunner(20);
-
     mSwerve = new Swerve();
+    conveyorBelt = new ConveyorBelt();
+    arm = new Arm();
 
     mOi = new OI();
     mChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
+    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", mChooser);
   }
@@ -44,6 +52,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     mSwerve.updateSmartDashboard();
+    conveyorBelt.updateSmartDashboard();
+    arm.updateSmartDashboard();
   }
 
   @Override

@@ -7,6 +7,16 @@ public class RobotMap {
 
   public static class Ports {
 
+    public static final int
+
+      ARM_TALON = 666,
+      INTAKE_VICTOR = 666,
+      GRABBER_SOLENOID_A = 0,
+      GRABBER_SOLENOID_B = 1,
+
+      GAMEPAD_1 = 0,
+      GAMEPAD_2 = 1;
+
     public static final int[]
 
       AZIMUTH = {
@@ -71,5 +81,18 @@ public class RobotMap {
         new PIDConstants(0.8, 0.0, 0.0)
       };
 
+  }
+
+  // For example to map the left and right motors, you could define the
+  // following variables to use with your drivetrain subsystem.
+  // public static int leftMotor = 1;
+  // public static int rightMotor = 2;
+
+  public static class Preferences {
+
+    public static final double
+
+      INTAKE_SPEED_IN = 0.5,
+      INTAKE_SPEED_OUT = -0.5;
   }
 }
