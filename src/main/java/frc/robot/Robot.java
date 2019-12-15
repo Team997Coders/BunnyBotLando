@@ -1,16 +1,6 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
+//test comment 2
 import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -24,7 +14,7 @@ import frc.robot.util.UpdateSwervePID;
 
 public class Robot extends TimedRobot {
 
-  public static final boolean IS_TUNING = false;
+  public static final boolean IS_TUNING = true;
 
   public static final int TUNING_ID = 0;
 
@@ -89,7 +79,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    //aaahhh.set(ControlMode.PercentOutput, Math.random());
     Scheduler.getInstance().run();
   }
 

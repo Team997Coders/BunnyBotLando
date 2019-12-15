@@ -1,20 +1,11 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.SetModuleAngle;
+import frc.robot.commands.drive.SetModuleAngle;
+import frc.robot.commands.drive.ZeroSwerve;
+import org.team997coders.spartanlib.math.MathUtils;
 
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
 public class OI {
 
   private Joystick gamepad;
@@ -35,12 +26,12 @@ public class OI {
       mX.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 180));
       mY.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 45));
     } else {
-      
+      mA.whenPressed(new ZeroSwerve());
     }
   }
 
   public double getAxis(int axis) {
-    return gamepad.getRawAxis(axis);
+    return MathUtils.deadband(gamepad.getRawAxis(axis), 0.05);
   }
 
   //// CREATING BUTTONS
