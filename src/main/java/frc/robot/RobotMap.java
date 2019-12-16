@@ -37,14 +37,20 @@ public class RobotMap {
 
   public static class Values {
 
-    public static double
+    public static final double
     
       // Despite the fact that they are named up and down, up is sorta up and down is to the side and down
       ARM_UP = 0.0,
       ARM_DOWN = 0.0,
-      ARM_DEGREES_RANGE = 110;
+      ARM_DEGREES_RANGE = 110,
 
-    public static double[]
+      LIMELIGHT_HORZ_FOV = 54,
+
+      MODULE_TICKS_IN_FOOT = 12000, // Complete BS
+
+      VISION_TARGET_AREA_PICKUP = 10; // Target area when in range of pickup
+
+    public static final double[]
 
       MODULE_FORWARD = {
         1.96,
@@ -72,6 +78,23 @@ public class RobotMap {
         0.3
       };
 
+    public static final PIDConstants
+
+      ROTATION_CORRECTION_CONSTANTS =
+        new PIDConstants(1.0, 0.0, 0.0),
+      
+      DRIVE_FEET_CONSTANTS =
+        new PIDConstants(1.0, 0.0, 0.0),
+
+      STRAFE_CORRECTION_CONSTANTS =
+        new PIDConstants(1.0, 0.0, 0.0),
+
+      DRIVE_TARGET_CONSTANTS =
+        new PIDConstants(1.0, 0.0, 0.0),
+
+      STRAFE_TARGET_CONSTANTS =
+        new PIDConstants(1.0, 0.0, 0.0);
+
     public static final PIDConstants[]
     
       AZIMUTH_CONSTANTS = {
@@ -90,6 +113,15 @@ public class RobotMap {
 
   }
 
+  public static class FieldValues {
+
+    public static final double
+
+      STATION_TO_BUCKET_TOUCH = 25,
+      STATION_TO_BUCKET_GRAB = 23.9;
+
+  }
+
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
   // public static int leftMotor = 1;
@@ -101,6 +133,13 @@ public class RobotMap {
 
       INTAKE_SPEED_IN = 0.5,
       INTAKE_SPEED_OUT = -0.5,
-      ARM_SPEED_MAX = 0.3;
+      INTAKE_SPEED_AUTO_IN = 0.4,
+      INTAKE_SPEED_AUTO_OUT = -0.5,
+      ARM_SPEED_MAX = 0.3,
+
+      AUTO_DRIVE_SPEED_PERCISE = 0.2,
+      AUTO_DRIVE_SPEED = 0.5,
+      AUTO_ROTATE_SPEED_PERCISE = 0.1,
+      AUTO_ROTATE_SPEED = 0.7;
   }
 }

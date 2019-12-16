@@ -11,6 +11,8 @@ public class SetpointArm extends Command {
   private boolean mWait = false;
 
   public SetpointArm(double angle, boolean wait) {
+    requires(Robot.mArm);
+
     mAngle = angle; mWait = wait;
   }
 

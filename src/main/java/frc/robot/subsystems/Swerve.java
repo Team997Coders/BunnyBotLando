@@ -47,7 +47,7 @@ public class Swerve extends SwerveDrive {
     }
   }
 
-  public Vector2 getSpeedVector() {
+  public Vector2 getSpeedVector(boolean isFieldOriented) {
     ArrayList<Vector2> vects = new ArrayList<Vector2>();
     for (int i = 0; i < mModules.length; i++) {
       vects.add(mModules[i].getSpeedVector());
@@ -61,6 +61,17 @@ public class Swerve extends SwerveDrive {
     });
 
     Vector2 avg = new Vector2(sum.x / vects.size(), sum.y / vects.size());
+
+    if (isFieldOriented) {
+      double angleRad = Math.toRadians(getYaw());
+      double temp = avg.y * Math.cos(angleRad) + avg.x * Math.sin(angleRad);
+      avg.x = -avg.y * Math.sin(angleRad) + avg.x * Math.cos(angleRad);
+      avg.y = temp;
+    }
+
+    avg.x /= RobotMap.Values.MODULE_TICKS_IN_FOOT;
+    avg.y /= RobotMap.Values.MODULE_TICKS_IN_FOOT;
+
     return avg;
   }
 

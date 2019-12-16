@@ -1,6 +1,7 @@
 package frc.robot;
 
-import frc.robot.commands.intake.IntakeMove;
+import frc.robot.commands.intake.MoveIntake;
+import frc.robot.commands.arm.SetpointArm;
 import frc.robot.commands.drive.SetModuleAngle;
 import frc.robot.commands.drive.ZeroSwerve;
 
@@ -18,8 +19,8 @@ public class OI {
     mGamepad1 = new Logitech(RobotMap.Ports.GAMEPAD_1);
     mGamepad2 = new Logitech(RobotMap.Ports.GAMEPAD_2);
     
-    mGamepad2.mRightBumper.whileHeld(new IntakeMove(RobotMap.Preferences.INTAKE_SPEED_OUT));
-    mGamepad2.mLeftBumper.whileHeld(new IntakeMove(RobotMap.Preferences.INTAKE_SPEED_IN)); // MARK: Not too sure wtf is going on here
+    mGamepad2.mRightBumper.whileHeld(new MoveIntake(RobotMap.Preferences.INTAKE_SPEED_OUT));
+    mGamepad2.mLeftBumper.whileActive(new MoveIntake(RobotMap.Preferences.INTAKE_SPEED_IN)); // MARK: Not too sure wtf is going on here
 
     if (Robot.IS_TUNING) {
       mGamepad1.mA.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 0));
@@ -29,6 +30,10 @@ public class OI {
     } else {
       mGamepad1.mA.whenPressed(new ZeroSwerve());
     }
+
+    mGamepad2.mA.whenPressed(new SetpointArm(0.0, false));
+    mGamepad2.mY.whenPressed(new SetpointArm(RobotMap.Values.ARM_DEGREES_RANGE, false));
+    mGamepad2.mX.whenPressed(new SetpointArm(40, false));
   }
 
   public Logitech getGamepad1() { return mGamepad1; }

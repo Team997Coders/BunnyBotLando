@@ -1,9 +1,9 @@
 package frc.robot;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 import org.team997coders.spartanlib.helpers.threading.SpartanRunner;
+import org.team997coders.spartanlib.limelight.LimeLight;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,6 +12,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.auto.routines.AutoDoNothing;
+import frc.robot.commands.auto.routines.AutoOneBunny;
+import frc.robot.commands.auto.routines.AutoPickupBucket;
+import frc.robot.commands.auto.routines.AutoTouchABucket;
+import frc.robot.commands.auto.routines.AutoVisionPickupBucket;
 import frc.robot.subsystems.Swerve;
 import frc.robot.util.ConstantsManager;
 import frc.robot.util.UpdateSwervePID;
@@ -20,6 +24,10 @@ import frc.robot.subsystems.Intake;
 
 public class Robot extends TimedRobot {
 
+  // General Use
+  private long mLastUpdate = 0;
+  public static long mDeltaT = 0;
+  
   // Tuning Stuff
   public static final boolean IS_TUNING = true;
   public static final int TUNING_ID = 0;
@@ -30,6 +38,7 @@ public class Robot extends TimedRobot {
   public static Swerve mSwerve;
   public static OI mOi;
   public static SpartanRunner mRunner;
+  public static LimeLight mLimeLight;
   private UpdateSwervePID mPidTuner = null;
 
   private Command mAutonomousCommand;
@@ -47,10 +56,15 @@ public class Robot extends TimedRobot {
     mSwerve = new Swerve();
     mIntake = new Intake();
     mArm = new Arm();
+    mLimeLight = new LimeLight();
 
     mOi = new OI();
 
     mChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
+    mChooser.addOption("Pickup 1 Bunny", new AutoOneBunny());
+    mChooser.addOption("Touch Bucket", new AutoTouchABucket());
+    mChooser.addOption("Pickup Bucket", new AutoPickupBucket());
+    mChooser.addOption("Vision Pickup Bucket", new AutoVisionPickupBucket());
     SmartDashboard.putData("Auto mode", mChooser);
 
     displayConstants();
@@ -60,6 +74,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     updateSmartDashboard();
+
+    mDeltaT = System.currentTimeMillis() - mLastUpdate;
   }
 
   @Override
@@ -110,6 +126,12 @@ public class Robot extends TimedRobot {
     mSwerve.updateSmartDashboard();
     mIntake.updateSmartDashboard();
     mArm.updateSmartDashboard();
+  }
+
+  public static double limRange(double val, double min, double max) {
+    while (val >= max) val -= Math.abs(min - max);
+    while (val < min) val += Math.abs(min - max);
+    return val;
   }
 
   public void displayConstants() {

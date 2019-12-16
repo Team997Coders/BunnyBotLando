@@ -6,11 +6,11 @@ import frc.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class IntakeMove extends Command {
+public class MoveIntake extends Command {
 
   private double mSpeed = 0.0;
 
-  public IntakeMove(double speed) {
+  public MoveIntake(double speed) {
     requires(Robot.mIntake);
     mSpeed = speed;
   }

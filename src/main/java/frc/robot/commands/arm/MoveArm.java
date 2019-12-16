@@ -15,7 +15,7 @@ public class MoveArm extends Command {
   @Override
   protected void execute() {
     Robot.mArm.setSpeed(
-      Robot.mOi.getGamepad2().getAxis(Logitech.Axis.LEFT_Y)
+      -Robot.mOi.getGamepad2().getAxis(Logitech.Axis.LEFT_Y)
       * RobotMap.Preferences.ARM_SPEED_MAX
     );
   }
