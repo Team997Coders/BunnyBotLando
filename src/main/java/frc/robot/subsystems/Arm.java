@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.MoveArm;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -66,10 +67,14 @@ public class Arm extends Subsystem {
     grabberEjected = false;
   }
 
+  public void setAngle(double perc) {
+
+  }
+
   public double getPercentUp(){
 
     final double currentEncoderTicks = getEncoderTicks();
-    final double percentUp = ((RobotMap.Values.armMinEncoderTicks/RobotMap.Values.armMaxEncoderTicks)*currentEncoderTicks)*100;
+    final double percentUp = (currentEncoderTicks-RobotMap.Values.armMinEncoderTicks/(RobotMap.Values.armMaxEncoderTicks- RobotMap.Values.armMinEncoderTicks));
     return percentUp;
   }
   public void updateSmartDashboard(){

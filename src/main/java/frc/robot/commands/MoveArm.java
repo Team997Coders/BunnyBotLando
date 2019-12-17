@@ -21,7 +21,7 @@ public class MoveArm extends Command {
 
   @Override
   protected void execute() {
-    Robot.arm.setSpeed(Robot.m_oi.getLeftYaxis());
+    Robot.arm.setSpeed(-Robot.m_oi.getLeftYaxis());
   }
 
   @Override
