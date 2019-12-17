@@ -37,7 +37,7 @@ public class Arm extends Subsystem {
 
   public void setSpeed(double speed) {
     if (Math.abs(speed) > 0.05) {
-      armMotor.set(ControlMode.PercentOutput, speed);
+      //armMotor.set(ControlMode.PercentOutput, speed);
     }
   }
 
@@ -60,7 +60,7 @@ public class Arm extends Subsystem {
   }
   
   public void ungrab(){
-    grabberSolenoid.set(DoubleSolenoid.Value.kOff);
+    grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     grabberEjected = false;
   }
 

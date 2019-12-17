@@ -36,7 +36,7 @@ public class RobotMap {
     joystick = 0, //Get real port
     leftYaxis = 1,
     grabberSolenoidPort1 = 0, //TODO: Get real port
-    grabberSolenoidPort2 = 0, //TODO: Get real port
+    grabberSolenoidPort2 = 1, //TODO: Get real port
     beltyBoi = 42069, //TODO: reeeee at Emi for acutal port
     rightBumper = 5,
     leftBumper = 4;
