@@ -32,7 +32,7 @@ public class RobotMap {
 
   public final static class Ports {
     public final static int
-    armMotor = 0, //Get real port
+    armMotor = 9, //Get real port
     joystick = 0, //Get real port
     leftYaxis = 1,
     grabberSolenoidPort1 = 0, //TODO: Get real port

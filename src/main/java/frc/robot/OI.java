@@ -26,7 +26,7 @@ public class OI {
     leftBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeIn));
 
     toggle = new JoystickButton(gamepad, 2);
-    toggle.whenPressed(new Grab(!Robot.arm.grabberEjected));
+    toggle.whenPressed(new Grab());
   }
 
   public double getLeftYaxis() {

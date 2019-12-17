@@ -5,14 +5,19 @@ import frc.robot.Robot;
 
 public class Grab extends Command {
 
-    boolean a;
+    static boolean a;
 
-    public Grab(boolean a) { this.a = a; }
+    @Override
+    protected void initialize() {
+        a = !a;
+    }
 
     @Override
     protected void execute() {
         if (a) Robot.arm.grab();
         else Robot.arm.ungrab();
+
+        System.out.println("ASD " + a);
     }
 
     @Override
