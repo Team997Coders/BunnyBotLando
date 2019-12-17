@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.AutoDriveToBucket;
+import frc.robot.commands.AutoPickUpBucket;
+import frc.robot.commands.AutoPickUpBunny;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ConveyorBelt;
 
@@ -35,7 +38,11 @@ public class Robot extends TimedRobot {
     arm = new Arm();
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    //chooser.addOption("My Auto", new MyAutoCommand());
+    chooser.addOption("Touch Bucket", new AutoDriveToBucket());
+    chooser.addOption("Pick up Bucket", new AutoPickUpBucket());
+    chooser.addOption("Pick up Bunnies", new AutoPickUpBunny()); //TODO: Add auto bases intake control before running this
+
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 

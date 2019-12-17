@@ -24,7 +24,13 @@ public class RobotMap {
       intakeIn = 0.5,
       intakeOut = -0.5;
   }
+  public static class Values{
+    public static final double 
+      armBucketUpEncoderTicks = 7654.321, //TODO: Make this eqal something rea
+      armMaxEncoderTicks = 45678,
+      armMinEncoderTicks = 123;
 
+  }
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;

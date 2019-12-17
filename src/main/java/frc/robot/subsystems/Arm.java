@@ -23,16 +23,18 @@ public class Arm extends Subsystem {
 
   public boolean grabberEjected = false;
   public double peakOutput = .7;
-
+  public double bucketUpEncoderTicks;
   public Arm() {
     armMotor = new TalonSRX(RobotMap.Ports.armMotor);
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 10);
     zeroEncoderTicks();
     //armMotor.configClosedLoopPeakOutput(0, .7);
 
     grabberSolenoid = new DoubleSolenoid(RobotMap.Ports.grabberSolenoidPort1, RobotMap.Ports.grabberSolenoidPort2); 
 
     sensorCollection = new SensorCollection(armMotor);
+    
+   
   }
 
   public void setSpeed(double speed) {
@@ -64,13 +66,21 @@ public class Arm extends Subsystem {
     grabberEjected = false;
   }
 
+  public double getPercentUp(){
+
+    final double currentEncoderTicks = getEncoderTicks();
+    final double percentUp = ((RobotMap.Values.armMinEncoderTicks/RobotMap.Values.armMaxEncoderTicks)*currentEncoderTicks)*100;
+    return percentUp;
+  }
   public void updateSmartDashboard(){
     SmartDashboard.putBoolean("Arm/Grabber Deployed", grabberEjected);
     SmartDashboard.putNumber("Arm/Encoder Val", getEncoderTicks());
+    SmartDashboard.putNumber("Arm Percent UP", getPercentUp());
   }
   
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new MoveArm());
   }
+
 }
