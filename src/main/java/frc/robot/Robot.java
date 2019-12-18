@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.*;
 //import frc.robot.commands.AutoDriveToBucket;
 //import frc.robot.commands.AutoPickUpBucket;
 //import frc.robot.commands.AutoPickUpBunny;
@@ -21,7 +22,7 @@ import frc.robot.subsystems.ConveyorBelt;
 public class Robot extends TimedRobot {
 
   public static ConveyorBelt conveyorBelt;
-  public static Arm arm;
+  public static Arm m_arm;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -35,7 +36,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     
     conveyorBelt = new ConveyorBelt();
-    arm = new Arm();
+    m_arm = new Arm();
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     //chooser.addOption("My Auto", new MyAutoCommand());
@@ -43,6 +44,8 @@ public class Robot extends TimedRobot {
     //chooser.addOption("Pick up Bucket", new AutoPickUpBucket());
     //chooser.addOption("Pick up Bunnies", new AutoPickUpBunny()); //TODO: Add auto bases intake control before running this
 
+    m_chooser.addDefault("Do Nothing", new AutoDoNothing());
+    m_chooser.addOption("Pick up bucket", new AutoPickUpBucket());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
@@ -57,7 +60,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     conveyorBelt.updateSmartDashboard();
-    arm.updateSmartDashboard();
+    m_arm.updateSmartDashboard();
   }
 
   /**

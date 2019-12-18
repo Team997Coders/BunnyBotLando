@@ -38,6 +38,9 @@ public class Arm extends Subsystem {
    
   }
 
+  public void armToPositionTEMP(double position) { } 
+  //TODO replace with Rohan's actual code.
+
   public void setSpeed(double speed) {
     if (Math.abs(speed) > 0.05) {
       armMotor.set(ControlMode.PercentOutput, speed);
@@ -65,6 +68,14 @@ public class Arm extends Subsystem {
   public void ungrab(){
     grabberSolenoid.set(DoubleSolenoid.Value.kOff);
     grabberEjected = false;
+  }
+
+  public void moveClaw(boolean direction) {
+    if (direction) {
+      grab();
+    } else {
+      ungrab();
+    }
   }
 
   public void setAngle(double perc) {

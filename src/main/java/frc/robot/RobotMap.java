@@ -26,10 +26,10 @@ public class RobotMap {
   }
   public static class Values{
     public static final double 
-      armBucketUpEncoderTicks = 7654.321, //TODO: Make this eqal something rea
+      armGroundHeight = 202818024, //TODO: make this a real value, the height we need to be at to pick up a bucket.
       armMaxEncoderTicks = 45678,
-      armMinEncoderTicks = 123;
-
+      armMinEncoderTicks = 123,
+      armTolerance = 5;
   }
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
