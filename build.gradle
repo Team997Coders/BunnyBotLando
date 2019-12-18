@@ -56,6 +56,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     // compile 'com.github.team997coders:SpartanLib:swerve-SNAPSHOT'
     compile files('../SpartanLib/build/libs/spartanlib-all.jar')
+    compile 'com.google.code.gson:gson:2.8.6'
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
