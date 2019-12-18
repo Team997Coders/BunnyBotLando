@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,20 +29,29 @@ public class Arm extends Subsystem {
   public Arm() {
     armMotor = new TalonSRX(RobotMap.Ports.armMotor);
     armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 10);
-    zeroEncoderTicks();
+    //zeroEncoderTicks();
     //armMotor.configClosedLoopPeakOutput(0, .7);
 
     grabberSolenoid = new DoubleSolenoid(RobotMap.Ports.grabberSolenoidPort1, RobotMap.Ports.grabberSolenoidPort2); 
 
+    armMotor.configFactoryDefault(10);
+    armMotor.clearStickyFaults(10);
+
     sensorCollection = new SensorCollection(armMotor);
-    
-   
+    //armMotor.config_kP(0, RobotMap.Values.armP);
+    //armMotor.config_kI(0, 0.0);
+    //armMotor.config_kD(0, 0.0);
+    //armMotor.configNominalOutputForward(0.75, 10);
+    //armMotor.configNominalOutputReverse(-0.75, 10);
+    //armMotor.configForwardSoftLimitThreshold()
   }
 
   public void setSpeed(double speed) {
     if (Math.abs(speed) > 0.05) {
-      armMotor.set(ControlMode.PercentOutput, speed);
+      armMotor.set(ControlMode.PercentOutput, speed * 0.4);
+      //armMotor.set
     }
+    SmartDashboard.putNumber("Sped", speed);
   }
 
   public boolean getTopSwitch() {
@@ -53,7 +63,7 @@ public class Arm extends Subsystem {
   }
 
   public void zeroEncoderTicks() {
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 10);
     armMotor.setSelectedSensorPosition(0, 0, 10);
   }
 
@@ -68,19 +78,26 @@ public class Arm extends Subsystem {
   }
 
   public void setAngle(double perc) {
-
+    double range = RobotMap.Values.armMaxEncoderTicks - RobotMap.Values.armMinEncoderTicks;
+    
+    double offset = perc * range;
+    double ticks = offset + RobotMap.Values.armMinEncoderTicks;
+    //armMotor.set(ControlMode.Position, ticks);
+    
   }
 
-  public double getPercentUp(){
+ 
 
+  public double getPercentUp(){
+    double range = RobotMap.Values.armMaxEncoderTicks - RobotMap.Values.armMinEncoderTicks;
     final double currentEncoderTicks = getEncoderTicks();
-    final double percentUp = (currentEncoderTicks-RobotMap.Values.armMinEncoderTicks/(RobotMap.Values.armMaxEncoderTicks- RobotMap.Values.armMinEncoderTicks));
+    final double percentUp = ((currentEncoderTicks - RobotMap.Values.armMinEncoderTicks) / range);
     return percentUp;
   }
   public void updateSmartDashboard(){
-    SmartDashboard.putBoolean("Arm/Grabber Deployed", grabberEjected);
+    //SmartDashboard.putBoolean("Arm/Grabber Deployed", grabberEjected());
     SmartDashboard.putNumber("Arm/Encoder Val", getEncoderTicks());
-    SmartDashboard.putNumber("Arm Percent UP", getPercentUp());
+    SmartDashboard.putNumber("Arm/Arm Percent UP", getPercentUp());
   }
   
   @Override

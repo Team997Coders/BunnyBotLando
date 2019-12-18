@@ -27,8 +27,11 @@ public class RobotMap {
   public static class Values{
     public static final double 
       armBucketUpEncoderTicks = 7654.321, //TODO: Make this eqal something rea
-      armMaxEncoderTicks = 45678,
-      armMinEncoderTicks = 123;
+      armMinEncoderTicks = -1265.5,
+      armMaxEncoderTicks = 0,
+
+      armP = 3;
+    
 
   }
   // If you are using multiple modules, make sure to define both the port
@@ -42,7 +45,7 @@ public class RobotMap {
     joystick = 0, //Get real port
     leftYaxis = 1,
     grabberSolenoidPort1 = 0, //TODO: Get real port
-    grabberSolenoidPort2 = 0, //TODO: Get real port
+    grabberSolenoidPort2 = 1, //TODO: Get real port
     beltyBoi = 42069, //TODO: reeeee at Emi for acutal port
     rightBumper = 5,
     leftBumper = 4;

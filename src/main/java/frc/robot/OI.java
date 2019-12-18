@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ConveyorMove;
+import frc.robot.commands.Grab;
+import frc.robot.commands.SetArmAngle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -12,7 +14,7 @@ import frc.robot.commands.ConveyorMove;
 public class OI {
 
   public Joystick gamepad;
-  private Button rightBumper, leftBumper;
+  private Button rightBumper, leftBumper, a, b, x,y;
   
   public OI(){
     
@@ -24,7 +26,16 @@ public class OI {
     rightBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeOut));
     leftBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeIn));
 
-   
+    a = new JoystickButton(gamepad, 1);
+    b = new JoystickButton(gamepad, 2);
+    x = new JoystickButton(gamepad, 3);
+    y = new JoystickButton(gamepad, 4);
+    
+    a.whenPressed(new SetArmAngle(-0.01));
+    b.whenPressed(new SetArmAngle(1));
+    x.whenPressed(new SetArmAngle(0.5));
+
+    y.whenPressed(new Grab());
   }
 
   public double getLeftYaxis() {

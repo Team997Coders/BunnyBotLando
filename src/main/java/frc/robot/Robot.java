@@ -67,6 +67,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    //arm.setAngle(arm.getPercentUp());
   }
 
   @Override
@@ -100,6 +101,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
+
+    //arm.stopUsingPID();
   }
 
   /**
@@ -119,6 +122,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    //arm.stopUsingPID();
   }
 
   /**
