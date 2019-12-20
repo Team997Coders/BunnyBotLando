@@ -14,7 +14,7 @@ import frc.robot.commands.SetArmAngle;
 public class OI {
 
   public Joystick gamepad;
-  private Button rightBumper, leftBumper, a, b, x,y;
+  private Button rightBumper, leftBumper, a, b, x, y, start;
   
   public OI(){
     
@@ -25,6 +25,9 @@ public class OI {
     
     rightBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeOut));
     leftBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeIn));
+
+    start = new JoystickButton(gamepad, 8);
+    start.whenPressed(new Grab());
 
     a = new JoystickButton(gamepad, 1);
     b = new JoystickButton(gamepad, 2);

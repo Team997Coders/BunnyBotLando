@@ -79,7 +79,7 @@ public class Arm extends Subsystem {
   }
   
   public void ungrab(){
-    grabberSolenoid.set(DoubleSolenoid.Value.kOff);
+    grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     grabberEjected = false;
   }
 
