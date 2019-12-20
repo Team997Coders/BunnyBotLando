@@ -18,9 +18,9 @@ public class Grab extends Command {
     @Override
     protected void execute() {
         if (grabbed){
-            Robot.arm.grab();
+            Robot.mArm.grab();
         }else{
-            Robot.arm.ungrab();
+            Robot.mArm.ungrab();
         }
     }
     @Override

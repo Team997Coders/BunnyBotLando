@@ -13,7 +13,7 @@ public class SetArmAngle extends Command {
 
   @Override
   protected void execute() {
-    Robot.arm.setAngle(angle);
+    Robot.mArm.setAngle(angle);
   }
 
   @Override

@@ -18,13 +18,13 @@ public class ConveyorMove extends Command {
   private double mSpeed = 0.0;
 
   public ConveyorMove(double speed) {
-    requires(Robot.conveyorBelt);
+    requires(Robot.mIntake);
     mSpeed = speed;
   }
 
   @Override
   protected void execute() {
-    Robot.conveyorBelt.setSpeed(mSpeed);
+    Robot.mIntake.setSpeed(mSpeed);
   }
 
   @Override
@@ -32,7 +32,7 @@ public class ConveyorMove extends Command {
 
   @Override
   protected void end() {
-    Robot.conveyorBelt.setSpeed(0.0);
+    Robot.mIntake.setSpeed(0.0);
   }
 
   @Override

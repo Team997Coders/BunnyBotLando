@@ -13,26 +13,23 @@ import frc.robot.commands.SetArmAngle;
  */
 public class OI {
 
-  public Joystick gamepad;
-  private Button rightBumper, leftBumper, a, b, x, y, start;
+  public Joystick gamepad1, gamepad2;
+  private Button rightBumper, leftBumper, a, b, x, y;
   
   public OI(){
     
-    gamepad = new Joystick(0);
+    gamepad1 = new Joystick(0);
     
-    rightBumper = new JoystickButton(gamepad, RobotMap.Ports.rightBumper);
-    leftBumper = new JoystickButton(gamepad, RobotMap.Ports.leftBumper);
+    rightBumper = new JoystickButton(gamepad1, RobotMap.Ports.rightBumper);
+    leftBumper = new JoystickButton(gamepad1, RobotMap.Ports.leftBumper);
     
     rightBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeOut));
     leftBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeIn));
 
-    start = new JoystickButton(gamepad, 8);
-    start.whenPressed(new Grab());
-
-    a = new JoystickButton(gamepad, 1);
-    b = new JoystickButton(gamepad, 2);
-    x = new JoystickButton(gamepad, 3);
-    y = new JoystickButton(gamepad, 4);
+    a = new JoystickButton(gamepad1, 1);
+    b = new JoystickButton(gamepad1, 2);
+    x = new JoystickButton(gamepad1, 3);
+    y = new JoystickButton(gamepad1, 4);
     
     a.whenPressed(new SetArmAngle(-0.01));
     b.whenPressed(new SetArmAngle(1));
@@ -41,8 +38,8 @@ public class OI {
     y.whenPressed(new Grab());
   }
 
-  public double getLeftYaxis() {
-    return gamepad.getRawAxis(RobotMap.Ports.leftYaxis);
+  public double getAxis(int port) {
+    return gamepad1.getRawAxis(port);
   }
 
 }

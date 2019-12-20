@@ -13,7 +13,7 @@ public class AutoPickUpBucket extends Command {
   
   public AutoPickUpBucket() {
 
-    requires(Robot.arm);
+    requires(Robot.mArm);
   
   }
 
@@ -25,13 +25,13 @@ public class AutoPickUpBucket extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    while (!Robot.arm.getTopSwitch()) {
-      Robot.arm.setSpeed(0.5);
+    while (!Robot.mArm.getTopSwitch()) {
+      Robot.mArm.setSpeed(0.5);
     }
-    Robot.arm.grab();
+    Robot.mArm.grab();
    
-    while (!(Robot.arm.getEncoderTicks() == Robot.arm.bucketUpEncoderTicks)){
-      Robot.arm.setSpeed(-0.5);
+    while (!(Robot.mArm.getEncoderTicks() == Robot.mArm.bucketUpEncoderTicks)){
+      Robot.mArm.setSpeed(-0.5);
     }
   }
 
