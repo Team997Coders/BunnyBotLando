@@ -40,17 +40,18 @@ public class Arm extends Subsystem {
 
     sensorCollection = new SensorCollection(armMotor);
     sensorCollection.getAnalogIn();
-    //armMotor.config_kP(0, RobotMap.Values.armP);
-    //armMotor.config_kI(0, 0.0);
-    //armMotor.config_kD(0, 0.0);
+    armMotor.config_kP(0, RobotMap.Values.armP);
+    armMotor.config_kI(0, 0.0);
+    armMotor.config_kD(0, 0.0);
     //armMotor.configNominalOutputForward(0.75, 10);
     //armMotor.configNominalOutputReverse(-0.75, 10);
+    //armMotor.configClosedLoopPeakOutput(0, 0.5, 10);
     //armMotor.configForwardSoftLimitThreshold()
   }
 
   public void setSpeed(double speed) {
     if (Math.abs(speed) > 0.05) {
-      armMotor.set(ControlMode.PercentOutput, speed * 0.4);
+      armMotor.set(ControlMode.PercentOutput, speed * 0.8);
       //armMotor.set
     }
     SmartDashboard.putNumber("Sped", speed);
@@ -88,7 +89,7 @@ public class Arm extends Subsystem {
     
     double offset = perc * range;
     double ticks = offset + RobotMap.Values.armMinEncoderTicks;
-    //armMotor.set(ControlMode.Position, ticks);
+    armMotor.set(ControlMode.Position, ticks);
     
   }
 
