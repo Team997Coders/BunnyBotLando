@@ -8,11 +8,23 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.subsystems.Swerve;
 import frc.robot.util.UpdateSwervePID;
 
+import frc.robot.commands.*;
+//import frc.robot.commands.AutoDriveToBucket;
+//import frc.robot.commands.AutoPickUpBucket;
+//import frc.robot.commands.AutoPickUpBunny;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ConveyorBelt;
+
 public class Robot extends TimedRobot {
+
+  public static ConveyorBelt conveyorBelt;
+  public static Arm m_arm;
+  public static OI m_oi;
 
   public static final boolean IS_TUNING = true;
 
@@ -36,14 +48,29 @@ public class Robot extends TimedRobot {
     mSwerve = new Swerve();
 
     mOi = new OI();
-    mChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+ 
+    conveyorBelt = new ConveyorBelt();
+    m_arm = new Arm();
+
+    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    //chooser.addOption("My Auto", new MyAutoCommand());
+    //chooser.addOption("Touch Bucket", new AutoDriveToBucket());
+    //chooser.addOption("Pick up Bucket", new AutoPickUpBucket());
+    //chooser.addOption("Pick up Bunnies", new AutoPickUpBunny()); //TODO: Add auto bases intake control before running this
+
+    mChooser.addDefault("Do Nothing", new AutoDoNothing());
+    mChooser.addOption("Pick up bucket", new AutoPickUpBucket());
     SmartDashboard.putData("Auto mode", mChooser);
+
   }
   
   @Override
   public void robotPeriodic() {
+
     mSwerve.updateSmartDashboard();
+    conveyorBelt.updateSmartDashboard();
+    m_arm.updateSmartDashboard();
+
   }
 
   @Override
