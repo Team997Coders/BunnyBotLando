@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
@@ -38,6 +39,7 @@ public class Arm extends Subsystem {
     armMotor.clearStickyFaults(10);
 
     sensorCollection = new SensorCollection(armMotor);
+    sensorCollection.getAnalogIn();
     //armMotor.config_kP(0, RobotMap.Values.armP);
     //armMotor.config_kI(0, 0.0);
     //armMotor.config_kD(0, 0.0);
@@ -60,6 +62,10 @@ public class Arm extends Subsystem {
 
   public double getEncoderTicks(){
     return armMotor.getSelectedSensorPosition(0);
+  }
+
+  public double getEncoderTickAbsolute() {
+    return sensorCollection.getAnalogIn();
   }
 
   public void zeroEncoderTicks() {
@@ -98,6 +104,7 @@ public class Arm extends Subsystem {
     //SmartDashboard.putBoolean("Arm/Grabber Deployed", grabberEjected());
     SmartDashboard.putNumber("Arm/Encoder Val", getEncoderTicks());
     SmartDashboard.putNumber("Arm/Arm Percent UP", getPercentUp());
+    SmartDashboard.putNumber("Arm/Encoder Absolute Val", getEncoderTickAbsolute());
   }
   
   @Override
