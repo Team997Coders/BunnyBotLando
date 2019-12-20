@@ -11,37 +11,37 @@ import frc.robot.RobotMap;
 
 public class ArmToPosition extends Command {
 
-    private double position;
+	private double position;
 
-  public ArmToPosition(double position) {
-      requires(Robot.m_arm);
-      this.position = position;
-  }
+	public ArmToPosition(double position) {
+		requires(Robot.m_arm);
+		this.position = position;
+	}
 
-  @Override
-  protected void initialize() {
-  }
+	@Override
+	protected void initialize() {
+	}
 
-  @Override
-  protected void execute() {
-    
-    Robot.m_arm.armToPositionTEMP(position);
+	@Override
+	protected void execute() {
 
-  }
+		Robot.m_arm.armToPositionTEMP(position);
 
-  @Override
-  protected boolean isFinished() {
-      return (Math.abs(Robot.m_arm.getEncoderTicks() - position) < RobotMap.Values.armTolerance);
-  }
+	}
 
-  @Override
-  protected void end() {
-      Robot.m_arm.setSpeed(0);
-  }
+	@Override
+	protected boolean isFinished() {
+		return (Math.abs(Robot.m_arm.getEncoderTicks() - position) < RobotMap.Values.armTolerance);
+	}
 
-  @Override
-  protected void interrupted() {
-      System.out.println("ArmToPosition command interrupted! :(");
-      end();
-  }
+	@Override
+	protected void end() {
+		Robot.m_arm.setSpeed(0);
+	}
+
+	@Override
+	protected void interrupted() {
+		System.out.println("ArmToPosition command interrupted! :(");
+		end();
+	}
 }

@@ -12,11 +12,11 @@ import frc.robot.Robot;
 
 public class Grab extends Command {
 
-    private boolean grabbing;
+  private boolean grabbing;
 
   public Grab(boolean grabbing) {
-      requires(Robot.m_arm);
-      this.grabbing = grabbing;
+    requires(Robot.m_arm);
+    this.grabbing = grabbing;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -24,7 +24,7 @@ public class Grab extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-      Robot.m_arm.moveClaw(grabbing);
+    Robot.m_arm.moveClaw(grabbing);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -47,7 +47,7 @@ public class Grab extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-      System.out.println("Grab command interrupted!");
-      end();
+    System.out.println("Grab command interrupted!");
+    end();
   }
 }
