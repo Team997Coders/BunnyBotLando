@@ -21,14 +21,18 @@ public class Arm extends Subsystem {
 
   private DoubleSolenoid grabberSolenoid;
 
-  public boolean grabberEjected = false;
-  public double peakOutput = .7;
+  public boolean kGrabberClosed = false;
+  public double kPeakOutout = .7;
+
+  /* Nonzero to block the config until success, zero to skip checking */
+  final int kTimeoutMs = 30;
 
   public Arm() {
     armMotor = new TalonSRX(RobotMap.Ports.armMotor);
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+
+    armMotor.configFactoryDefault();
+
     zeroEncoderTicks();
-    //armMotor.configClosedLoopPeakOutput(0, .7);
 
     grabberSolenoid = new DoubleSolenoid(RobotMap.Ports.grabberSolenoidPort1, RobotMap.Ports.grabberSolenoidPort2); 
 
@@ -45,32 +49,64 @@ public class Arm extends Subsystem {
     return sensorCollection.isFwdLimitSwitchClosed();
   }
 
-  public double getEncoderTicks(){
+  public int getEncoderTicks(){
     return armMotor.getSelectedSensorPosition(0);
   }
 
   public void zeroEncoderTicks() {
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    armMotor.setSelectedSensorPosition(0, 0, 10);
+    // zero the relative encoder count
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
+    armMotor.setSelectedSensorPosition(0, 0, kTimeoutMs);
   }
 
   public void grab(){
     grabberSolenoid.set(DoubleSolenoid.Value.kForward);
-    grabberEjected = true;
+    kGrabberClosed = true;
   }
   
   public void ungrab(){
     grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
-    grabberEjected = false;
+    kGrabberClosed = false;
   }
 
   public void updateSmartDashboard(){
-    SmartDashboard.putBoolean("Arm/Grabber Deployed", grabberEjected);
+    SmartDashboard.putBoolean("Arm/Grabber Deployed", kGrabberClosed);
     SmartDashboard.putNumber("Arm/Encoder Val", getEncoderTicks());
+    SmartDashboard.putNumber("Arm/Ange", ToDeg(getEncoderTicks()));
   }
   
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new MoveArm());
   }
+
+  public void initQuadrature() {
+		/* get the absolute pulse width position */
+		int pulseWidth = armMotor.getSensorCollection().getPulseWidthPosition();
+
+		/**
+		 * Mask out the bottom 12 bits to normalize to [0,4095],
+		 * or in other words, to stay within [0,360) degrees 
+		 */
+		pulseWidth = pulseWidth & 0xFFF;
+
+		/* Update Quadrature position */
+	  armMotor.getSensorCollection().setQuadraturePosition(pulseWidth, kTimeoutMs);
+  }
+  
+  	/**
+	 * @param units CTRE mag encoder sensor units 
+	 * @return degrees rounded to tenths.
+	 */
+	double ToDeg(int units) {
+		double deg = units * 360.0 / 4096.0;
+
+		/* truncate to 0.1 res */
+		deg *= 10.0;
+		deg = (int) deg;
+		deg /= 10.0;
+
+		return deg;
+	}
+
 }
