@@ -16,18 +16,18 @@ import frc.robot.Robot;
 public class ZeroArm extends Command {
 
   public ZeroArm() {
-    requires(Robot.m_arm);
+    requires(Robot.mArm);
   }
 
   @Override
   protected void execute() {
-    Robot.m_arm.setSpeed(-0.2);
+    Robot.mArm.setSpeed(-0.2);
   }
 
   @Override
   protected boolean isFinished() {
-    if (Robot.m_arm.getTopSwitch()) {
-      Robot.m_arm.zeroEncoderTicks();
+    if (Robot.mArm.getTopSwitch()) {
+      Robot.mArm.zeroEncoderTicks();
       return true;
     }
     return false;
@@ -35,7 +35,7 @@ public class ZeroArm extends Command {
 
   @Override
   protected void end() {
-    Robot.m_arm.setSpeed(0);
+    Robot.mArm.setSpeed(0);
   }
 
   @Override

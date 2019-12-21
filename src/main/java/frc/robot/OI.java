@@ -2,10 +2,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.drive.SetModuleAngle;
-import frc.robot.commands.drive.ZeroSwerve;
-import org.team997coders.spartanlib.math.MathUtils;
 import frc.robot.commands.ConveyorMove;
+import frc.robot.commands.Failsafe;
+import frc.robot.commands.Grab;
+import frc.robot.commands.SetArmAngle;
+import frc.robot.commands.drive.ZeroSwerve;
+import frc.robot.util.JoystickDPad;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -13,43 +15,42 @@ import frc.robot.commands.ConveyorMove;
  */
 public class OI {
 
-
-  public Joystick gamepad0, gamepad1;
-  private JoystickButton mA0, mB0, mX0, mY0, mRB1, mLB1;
+  public Joystick gamepad1, gamepad2;
+  private JoystickButton rightBumper, leftBumper, a, b, x, y;
+  private JoystickDPad up, down, left;
   
   public OI(){
     
-    gamepad0 = new Joystick(0);
-    gamepad1 = new Joystick(1);
+    gamepad1 = new Joystick(0);
 
-    mRB1 = new JoystickButton(gamepad0, RobotMap.Ports.rightBumper);
-    mLB1 = new JoystickButton(gamepad0, RobotMap.Ports.leftBumper);
+    up = new JoystickDPad(gamepad2, 0);
+    down = new JoystickDPad(gamepad2, 180);
+    left = new JoystickDPad(gamepad2, 270);
     
-    mRB1.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeOut));
-    mLB1.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeIn));
+    rightBumper = new JoystickButton(gamepad2, RobotMap.Ports.rightBumper);
+    leftBumper = new JoystickButton(gamepad2, RobotMap.Ports.leftBumper);
 
-    mA0 = new JoystickButton(gamepad0, 1);
-    mB0 = new JoystickButton(gamepad0, 2);
-    mX0 = new JoystickButton(gamepad0, 3);
-    mY0 = new JoystickButton(gamepad0, 4);
+    a = new JoystickButton(gamepad2, 1);
+    b = new JoystickButton(gamepad2, 2);
+    x = new JoystickButton(gamepad2, 3);
+    y = new JoystickButton(gamepad1, 4);
+    
+    a.whenPressed(new Grab(true));
+    b.whenPressed(new Failsafe());
+    x.whenPressed(new Grab(false));
+    y.whenPressed(new ZeroSwerve());
 
-    if (Robot.IS_TUNING) {
-      mA0.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 0));
-      mB0.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 90));
-      mX0.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 180));
-      mY0.whenPressed(new SetModuleAngle(Robot.TUNING_ID, 45));
-    } else {
-      mA0.whenPressed(new ZeroSwerve());
-    }
-   
+    up.whenPressed(new SetArmAngle(RobotMap.Values.armUp));
+    down.whenPressed(new SetArmAngle(RobotMap.Values.armBunny));
+    left.whenPressed(new SetArmAngle(RobotMap.Values.armBucket));
   }
 
-  public double getGamepad0Axis(int axis) {
-    return MathUtils.deadband(gamepad0.getRawAxis(axis), 0.05);
+  public double getAxis1(int port) {
+    return gamepad1.getRawAxis(port);
   }
 
-  public double getGamepad1Axis(int axis) {
-    return MathUtils.deadband(gamepad1.getRawAxis(axis), 0.05);
+  public double getAxis2(int port) {
+    return gamepad2.getRawAxis(port);
   }
 
 }

@@ -33,6 +33,7 @@ public class UpdateSwervePID {
       double i = SmartDashboard.getNumber("swerve/aziI", 0.0);
       double d = SmartDashboard.getNumber("swerve/aziD", 0.0);
       Robot.mSwerve.updateAzimuthPID(Robot.TUNING_ID, p, i, d);
+      System.out.println("SASDSA");
     }
   }
 

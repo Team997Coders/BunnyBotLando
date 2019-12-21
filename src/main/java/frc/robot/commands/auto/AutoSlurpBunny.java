@@ -6,28 +6,28 @@ import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
 public class AutoSlurpBunny extends CommandGroup {
-  
-    public AutoSlurpBunny() {
-           addSequential(new ArmToPosition(RobotMap.Values.armMinEncoderTicks));
-           addSequential(new ConveyorMove(-1), 3);
-           addSequential(new ArmToPosition(RobotMap.Values.armMaxEncoderTicks));
 
-    }
-    // Add Commands here:t
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
+  public AutoSlurpBunny() {
+    addSequential(new SetArmAngle(RobotMap.Values.armBunny));
+    addSequential(new ConveyorMove(-1), 3);
+    addSequential(new SetArmAngle(RobotMap.Values.armUp));
 
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
+  }
+  // Add Commands here:t
+  // e.g. addSequential(new Command1());
+  // addSequential(new Command2());
+  // these will run in order.
 
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
-  
+  // To run multiple commands at the same time,
+  // use addParallel()
+  // e.g. addParallel(new Command1());
+  // addSequential(new Command2());
+  // Command1 and Command2 will run in parallel.
+
+  // A command group will require all of the subsystems that each member
+  // would require.
+  // e.g. if Command1 requires chassis, and Command2 requires arm,
+  // a CommandGroup containing them would require both the chassis and the
+  // arm.
+
 }

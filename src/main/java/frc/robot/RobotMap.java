@@ -7,8 +7,8 @@ public class RobotMap {
 
   public static class Speeds {
     public static final double
-      intakeIn = 0.5,
-      intakeOut = -0.5;
+      intakeIn = 1,
+      intakeOut = -1;
   }
 
   public static class Ports {
@@ -29,49 +29,51 @@ public class RobotMap {
         8
       };
 
-      public final static int
-        armMotor = 9, //Get real port
-        joystick = 0, //Get real port
-        leftYaxis = 1,
-        leftXaxis = 0,
-        rightYaxis = 5,
-        rightXaxis = 4,
-        grabberSolenoidPort1 = 0, //TODO: Get real port
-        grabberSolenoidPort2 = 0, //TODO: Get real port
-        beltyBoi = 42069, //TODO: reeeee at Emi for acutal port
-        rightBumper = 5,
-        leftBumper = 4;
+    public final static int
+      armMotor = 9, //Get real port
+      joystick = 0, //Get real port
+      leftYaxis = 1,
+      leftXaxis = 0,
+      rightYaxis = 5,
+      rightXaxis = 4,
+      grabberSolenoidPort1 = 1, //TODO: Get real port
+      grabberSolenoidPort2 = 0, //TODO: Get real port
+      beltyBoi = 10, //TODO: reeeee at Emi for acutal port
+      rightBumper = 5,
+      leftBumper = 6;
+
   }
 
-  public static class Values {
-
+  public static class Values{
     public static final double
+      armMinEncoderTicks = -1265.5,
+      armMaxEncoderTicks = 0,
+
+      armP = 3,
       ticksPerRev = 261.3,
       ticksPerInch = 20.79625,
-      ticksPerFoot = 12 * ticksPerInch;
-
-    public static final double 
-      armGroundHeight = 202818024, //TODO: make this a real value, the height we need to be at to pick up a bucket.
-      armMaxEncoderTicks = 45678,
-      armMinEncoderTicks = 123,
-      armTolerance = 5;
+      ticksPerFoot = 12 * ticksPerInch,
+      armTolerance = 0.01,
+      armUp = 1,
+      armBucket = 0,
+      armBunny = -0.05;
 
     public static final double[]
-
+    
       MODULE_FORWARD = {
-        1.96,
-        2.37,
-        4.06,
-        0.96
+        4.02,
+        4.71,
+        1.51,
+        3.15
       };
 
     public static final PIDConstants[]
     
       AZIMUTH_CONSTANTS = {
-        new PIDConstants(0.01, 0.0, 0.00005),
-        new PIDConstants(/*0.017*/0.01, /*0.1*/0.0, /*0.45*/0.0),
-        new PIDConstants(0.01, 0.0, 0.2),
-        new PIDConstants(/*0.015*/0.01, /*0.0001*/0.0, /*0.3*/0.0)
+        new PIDConstants(0.01, 0, 0),
+        new PIDConstants(0.01, 0, 0),
+        new PIDConstants(0.01, 0, 0),
+        new PIDConstants(0.01, 0, 0)
       },
 
       DRIVE_CONSTANTS = {
@@ -95,4 +97,5 @@ public class RobotMap {
       STATION_TO_BUCKET_GRAB = 23.9;
 
   }
+
 }

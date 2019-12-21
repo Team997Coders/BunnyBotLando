@@ -8,18 +8,16 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.auto.*;
 import frc.robot.commands.*;
 
 public class AutoPickUpBucket extends CommandGroup {
   
     public AutoPickUpBucket() {
         addSequential(new AutoDriveForward(RobotMap.FieldValues.STATION_TO_BUCKET_GRAB)); //TODO
-        addSequential(new ArmToPosition(RobotMap.Values.armGroundHeight));
+        addSequential(new SetArmAngle(RobotMap.Values.armBucket));
         addSequential(new Grab(true));
-        addSequential(new ArmToPosition(RobotMap.Values.armMaxEncoderTicks));
+        addSequential(new SetArmAngle(RobotMap.Values.armUp));
     }
     // Add Commands here:t
     // e.g. addSequential(new Command1());

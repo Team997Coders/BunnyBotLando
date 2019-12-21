@@ -19,22 +19,22 @@ import frc.robot.commands.*;
 //import frc.robot.commands.AutoPickUpBunny;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ConveyorBelt;
+import frc.robot.subsystems.Swerve;
+import frc.robot.util.JoystickOverlord;
+import frc.robot.util.UpdateSwervePID;
 
 public class Robot extends TimedRobot {
 
   public static long mDeltaT = 0;
   private long mLastUpdate = 0;
+  public static final boolean IS_TUNING = false;
 
-  public static ConveyorBelt conveyorBelt;
-  public static Arm m_arm;
-  public static OI m_oi;
-
-  public static final boolean IS_TUNING = true;
-
-  public static final int TUNING_ID = 0;
+  public static final int TUNING_ID = 3;
 
   public static Swerve mSwerve;
   public static OI mOi;
+  public static Arm mArm;
+  public static ConveyorBelt mIntake;
   public static SpartanRunner mRunner;
   private UpdateSwervePID mPidTuner = null;
 
@@ -49,11 +49,10 @@ public class Robot extends TimedRobot {
     mRunner = new SpartanRunner(20);
 
     mSwerve = new Swerve();
+    mArm = new Arm();
+    mIntake = new ConveyorBelt();
 
     mOi = new OI();
- 
-    conveyorBelt = new ConveyorBelt();
-    m_arm = new Arm();
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     //chooser.addOption("My Auto", new MyAutoCommand());
@@ -61,25 +60,27 @@ public class Robot extends TimedRobot {
     //chooser.addOption("Pick up Bucket", new AutoPickUpBucket());
     //chooser.addOption("Pick up Bunnies", new AutoPickUpBunny()); //TODO: Add auto bases intake control before running this
 
-    mChooser.addDefault("Do Nothing", new AutoDoNothing());
+    mChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
     mChooser.addOption("Pick up bucket", new AutoPickUpBucket());
+    mChooser.addOption("Slurp Bunny", new AutoSlurpBunny());
     SmartDashboard.putData("Auto mode", mChooser);
-
   }
   
   @Override
   public void robotPeriodic() {
 
     mSwerve.updateSmartDashboard();
-    conveyorBelt.updateSmartDashboard();
-    m_arm.updateSmartDashboard();
+    mIntake.updateSmartDashboard();
+    mArm.updateSmartDashboard();
 
     mDeltaT = System.currentTimeMillis() - mLastUpdate;
 
+    JoystickOverlord.CommenceTheRitual();
   }
 
   @Override
   public void disabledInit() {
+    //arm.setAngle(arm.getPercentUp());
   }
 
   @Override
@@ -95,6 +96,8 @@ public class Robot extends TimedRobot {
     if (mAutonomousCommand != null) {
       mAutonomousCommand.start();
     }
+
+    //arm.stopUsingPID();
   }
 
   @Override
@@ -107,6 +110,8 @@ public class Robot extends TimedRobot {
     if (mAutonomousCommand != null) {
       mAutonomousCommand.cancel();
     }
+
+    //arm.stopUsingPID();
   }
 
   @Override

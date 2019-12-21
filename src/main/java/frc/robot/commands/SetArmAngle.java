@@ -3,18 +3,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Grab extends Command {
+public class SetArmAngle extends Command {
 
-  private boolean grab = false;
+  double angle;
 
-  public Grab(boolean grab) {
-    this.grab = grab;
+  public SetArmAngle(double perc) {
+    this.angle = perc;
   }
 
   @Override
   protected void execute() {
-    if (grab) Robot.mArm.grab();
-    else Robot.mArm.ungrab();
+    Robot.mArm.setAngle(angle);
   }
 
   @Override

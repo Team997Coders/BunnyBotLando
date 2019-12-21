@@ -16,12 +16,12 @@ import frc.robot.Robot;
 public class MoveArm extends Command {
 
   public MoveArm() {
-    requires(Robot.m_arm);
+    requires(Robot.mArm);
   }
 
   @Override
   protected void execute() {
-    Robot.m_arm.setSpeed(-Robot.m_oi.getGamepad1Axis(1));
+    Robot.mArm.setSpeed(Robot.mOi.getAxis2(3) - Robot.mOi.getAxis2(2));
   }
 
   @Override
@@ -31,7 +31,7 @@ public class MoveArm extends Command {
 
   @Override
   protected void end() {
-    Robot.m_arm.setSpeed(0);
+    Robot.mArm.setSpeed(0);
   }
 
   @Override
