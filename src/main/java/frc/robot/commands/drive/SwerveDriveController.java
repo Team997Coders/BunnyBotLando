@@ -18,9 +18,9 @@ public class SwerveDriveController extends Command {
 
   @Override
   protected void execute() {
-    double f = -Robot.mOi.getAxis(1);
-    double s = Robot.mOi.getAxis(0);
-    double r = Robot.mOi.getAxis(4);
+    double f = -Robot.mOi.getAxis(1) * 0.99;
+    double s = Robot.mOi.getAxis(0) * 0.99;
+    double r = -Robot.mOi.getAxis(4) * 0.99;
 
     double angle = -Robot.mSwerve.getYaw();
 

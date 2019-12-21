@@ -10,9 +10,9 @@ public class UpdateSwervePID {
 
   public UpdateSwervePID(int moduleID) {
     
-    mLastP = RobotMap.Values.AZIMUTH_P[moduleID];
-    mLastI = RobotMap.Values.AZIMUTH_I[moduleID];
-    mLastD = RobotMap.Values.AZIMUTH_D[moduleID];
+    mLastP = RobotMap.Values.AZIMUTH_CONSTANTS[moduleID].P;
+    mLastI = RobotMap.Values.AZIMUTH_CONSTANTS[moduleID].I;
+    mLastD = RobotMap.Values.AZIMUTH_CONSTANTS[moduleID].D;
 
     SmartDashboard.putNumber("swerve/aziP", mLastP);
     SmartDashboard.putNumber("swerve/aziI", mLastI);
@@ -33,6 +33,7 @@ public class UpdateSwervePID {
       double i = SmartDashboard.getNumber("swerve/aziI", 0.0);
       double d = SmartDashboard.getNumber("swerve/aziD", 0.0);
       Robot.mSwerve.updateAzimuthPID(Robot.TUNING_ID, p, i, d);
+      System.out.println("SASDSA");
     }
   }
 
