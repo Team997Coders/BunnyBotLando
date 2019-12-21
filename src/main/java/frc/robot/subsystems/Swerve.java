@@ -12,7 +12,6 @@ import org.team997coders.spartanlib.swerve.module.TorqueModule;
 import org.team997coders.spartanlib.swerve.module.SwerveModule;
 
 import edu.wpi.first.wpilibj.SerialPort.Port;
-import edu.wpi.first.wpilibj.drive.Vector2d;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive.SwerveDriveController;
@@ -46,6 +45,8 @@ public class Swerve extends SwerveDrive {
       Robot.mRunner.AddAction(new UpdateModule(mModules[i], this));
       SpartanRunner.UnlockThread();
     }
+
+    setMaxSpeed(0.5);
   }
 
   public Vector2 getSpeedVector() {
@@ -78,6 +79,12 @@ public class Swerve extends SwerveDrive {
     while (theta < 0) theta += 360;
     while (theta >= 360) theta -= 360;
     return theta;
+  }
+
+  public void setMaxSpeed(double maxSpeed) {
+    for (int i = 0; i < mModules.length; i++) {
+      mModules[i].setMaxSpeed(maxSpeed);
+    }
   }
 
   @Override

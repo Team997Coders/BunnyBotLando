@@ -7,6 +7,7 @@ import frc.robot.commands.Failsafe;
 import frc.robot.commands.Grab;
 import frc.robot.commands.SetArmAngle;
 import frc.robot.commands.drive.ZeroSwerve;
+import frc.robot.util.JoystickCombo;
 import frc.robot.util.JoystickDPad;
 
 /**
@@ -18,6 +19,7 @@ public class OI {
   public Joystick gamepad1, gamepad2;
   private JoystickButton rightBumper, leftBumper, a, b, x, y;
   private JoystickDPad up, down, left;
+  private JoystickCombo uberSped, slowSped;
   
   public OI(){
     
@@ -29,6 +31,9 @@ public class OI {
     
     rightBumper = new JoystickButton(gamepad2, RobotMap.Ports.rightBumper);
     leftBumper = new JoystickButton(gamepad2, RobotMap.Ports.leftBumper);
+
+    rightBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeOut));
+    leftBumper.whileHeld(new ConveyorMove(RobotMap.Speeds.intakeIn));
 
     a = new JoystickButton(gamepad2, 1);
     b = new JoystickButton(gamepad2, 2);
@@ -43,6 +48,12 @@ public class OI {
     up.whenPressed(new SetArmAngle(RobotMap.Values.armUp));
     down.whenPressed(new SetArmAngle(RobotMap.Values.armBunny));
     left.whenPressed(new SetArmAngle(RobotMap.Values.armBucket));
+
+    uberSped = new JoystickCombo(gamepad1, 1, 3, 5);
+    slowSped = new JoystickCombo(gamepad1, 2, 5, 6);
+
+    uberSped.setRunnable(() -> Robot.mSwerve.setMaxSpeed(0.999));
+    slowSped.setRunnable(() -> Robot.mSwerve.setMaxSpeed(0.5));
   }
 
   public double getAxis1(int port) {
