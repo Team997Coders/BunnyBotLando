@@ -74,7 +74,7 @@ public class Swerve extends SwerveDrive {
   public void resetGyro() { mGyro.reset(); }
 
   public double getYaw() {
-    double theta = mGyro.getYaw();
+    double theta = -mGyro.getYaw();
     while (theta < 0) theta += 360;
     while (theta >= 360) theta -= 360;
     return theta;

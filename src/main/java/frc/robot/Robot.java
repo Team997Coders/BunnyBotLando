@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.AutoDoNothing;
 import frc.robot.subsystems.Swerve;
 import frc.robot.util.UpdateSwervePID;
 
+import frc.robot.commands.auto.*;
 import frc.robot.commands.*;
 //import frc.robot.commands.AutoDriveToBucket;
 //import frc.robot.commands.AutoPickUpBucket;
@@ -21,6 +21,9 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ConveyorBelt;
 
 public class Robot extends TimedRobot {
+
+  public static long mDeltaT = 0;
+  private long mLastUpdate = 0;
 
   public static ConveyorBelt conveyorBelt;
   public static Arm m_arm;
@@ -70,6 +73,8 @@ public class Robot extends TimedRobot {
     mSwerve.updateSmartDashboard();
     conveyorBelt.updateSmartDashboard();
     m_arm.updateSmartDashboard();
+
+    mDeltaT = System.currentTimeMillis() - mLastUpdate;
 
   }
 

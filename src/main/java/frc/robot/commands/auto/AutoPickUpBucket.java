@@ -5,15 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.auto.*;
+import frc.robot.commands.*;
 
 public class AutoPickUpBucket extends CommandGroup {
   
     public AutoPickUpBucket() {
+        addSequential(new AutoDriveForward(RobotMap.Values.)); //TODO
         addSequential(new ArmToPosition(RobotMap.Values.armGroundHeight));
         addSequential(new Grab(true));
         addSequential(new ArmToPosition(RobotMap.Values.armMaxEncoderTicks));

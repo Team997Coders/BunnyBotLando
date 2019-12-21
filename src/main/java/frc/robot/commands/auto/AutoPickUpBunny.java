@@ -5,12 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
-
-public class AutoDriveToBucket extends Command {
-  public AutoDriveToBucket() {
+import frc.robot.Robot;
+public class AutoPickUpBunny extends Command {
+  public AutoPickUpBunny() {
+    requires(Robot.conveyorBelt);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -23,6 +24,7 @@ public class AutoDriveToBucket extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.conveyorBelt.setSpeed(0.5); //
   }
 
   // Make this return true when this Command no longer needs to run execute()

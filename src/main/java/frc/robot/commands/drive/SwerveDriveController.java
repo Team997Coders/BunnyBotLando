@@ -23,7 +23,7 @@ public class SwerveDriveController extends Command {
     double s = Robot.mOi.getGamepad0Axis(RobotMap.Ports.leftXaxis);
     double r = Robot.mOi.getGamepad0Axis(RobotMap.Ports.rightXaxis);
 
-    double angle = -Robot.mSwerve.getYaw();
+    double angle = Robot.mSwerve.getYaw();
 
     SwerveMixerData dat = Robot.mSwerve.getSwerveData(f, s, r, angle);
     Robot.mSwerve.setSwerveInput(dat);

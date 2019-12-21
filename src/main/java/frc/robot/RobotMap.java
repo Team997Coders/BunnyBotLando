@@ -45,6 +45,11 @@ public class RobotMap {
 
   public static class Values {
 
+    public static final double
+      ticksPerRev = 261.3,
+      ticksPerInch = 20.79625,
+      ticksPerFoot = 12 * ticksPerInch;
+
     public static final double 
       armGroundHeight = 202818024, //TODO: make this a real value, the height we need to be at to pick up a bucket.
       armMaxEncoderTicks = 45678,
@@ -58,25 +63,6 @@ public class RobotMap {
         2.37,
         4.06,
         0.96
-      },
-
-      AZIMUTH_P = {
-        0.01,//0.0035, // 0.01,
-        0.017,
-        0.016,
-        0.015
-      },
-      AZIMUTH_I = {
-        0.0,//0.35, // 0,
-        0.1,
-        0,
-        0.0001
-      },
-      AZIMUTH_D = {
-        0.00005,
-        0.45,
-        0.2,
-        0.3
       };
 
     public static final PIDConstants[]
@@ -94,6 +80,10 @@ public class RobotMap {
         new PIDConstants(0.8, 0.0, 0.0),
         new PIDConstants(0.8, 0.0, 0.0)
       };
+
+      public static final PIDConstants
+      AUTO_DRIVE_PID = new PIDConstants(0.01, 0.0, 0.0),
+      AUTO_TURN_PID = new PIDConstants(0.01, 0.0, 0.0);
 
   }
 }
