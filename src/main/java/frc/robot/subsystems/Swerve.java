@@ -28,17 +28,17 @@ public class Swerve extends SwerveDrive {
 
     mModules = new TorqueModule[4];
 
-    mModules[0] = new TorqueModule(0, RobotMap.Ports.AZIMUTH[0], RobotMap.Ports.DRIVE[0], 0,
+    mModules[0] = new TorqueModule(0, RobotMap.Ports.AZIMUTH[0], RobotMap.Ports.DRIVE[0], 2,
         RobotMap.Values.MODULE_FORWARD[0], RobotMap.Values.AZIMUTH_CONSTANTS[0], RobotMap.Values.DRIVE_CONSTANTS[0]);
     mModules[1] = new TorqueModule(1, RobotMap.Ports.AZIMUTH[1], RobotMap.Ports.DRIVE[1], 1,
         RobotMap.Values.MODULE_FORWARD[1], RobotMap.Values.AZIMUTH_CONSTANTS[1], RobotMap.Values.DRIVE_CONSTANTS[1]);
-    mModules[2] = new TorqueModule(2, RobotMap.Ports.AZIMUTH[2], RobotMap.Ports.DRIVE[2], 2,
+    mModules[2] = new TorqueModule(2, RobotMap.Ports.AZIMUTH[2], RobotMap.Ports.DRIVE[2], 3,
         RobotMap.Values.MODULE_FORWARD[2], RobotMap.Values.AZIMUTH_CONSTANTS[2], RobotMap.Values.DRIVE_CONSTANTS[2]);
-    mModules[3] = new TorqueModule(3, RobotMap.Ports.AZIMUTH[3], RobotMap.Ports.DRIVE[3], 3,
+    mModules[3] = new TorqueModule(3, RobotMap.Ports.AZIMUTH[3], RobotMap.Ports.DRIVE[3], 0,
         RobotMap.Values.MODULE_FORWARD[3], RobotMap.Values.AZIMUTH_CONSTANTS[3], RobotMap.Values.DRIVE_CONSTANTS[3]);
 
-    mModules[1].invertDrive(true, true);
-    mModules[3].invertDrive(true, true);
+    //mModules[3].invertDrive(true, true);
+    //mModules[0].invertDrive(true, true);
 
     for (int i = 0; i < mModules.length; i++) {
       mModules[i].setDriveBrakeMode(true);
