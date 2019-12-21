@@ -20,7 +20,11 @@ public class RobotMap {
       armMinEncoderTicks = -1265.5,
       armMaxEncoderTicks = 0,
 
-      armP = 3;
+      armP = 3,
+
+      armUp = 1,
+      armBucket = 0,
+      armBunny = -0.05;
 
     public static final double[]
     

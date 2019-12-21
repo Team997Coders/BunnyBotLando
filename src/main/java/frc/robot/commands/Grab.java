@@ -5,26 +5,23 @@ import frc.robot.Robot;
 
 public class Grab extends Command {
 
-    static boolean grabbed = true;
-    public Grab(){
-        
-        
+  private boolean grab = false;
+
+  public Grab(boolean grab) {
+    this.grab = grab;
+  }
+
+  @Override
+  protected void execute() {
+    if (grab) {
+      Robot.mArm.grab();
+    } else {
+      Robot.mArm.ungrab();
     }
-    
-    @Override
-    protected void initialize() {
-        grabbed = !grabbed;
-    }
-    @Override
-    protected void execute() {
-        if (grabbed){
-            Robot.mArm.grab();
-        }else{
-            Robot.mArm.ungrab();
-        }
-    }
-    @Override
-    protected boolean isFinished() {
-        return true;
-    }
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return true;
+  }
 }

@@ -12,6 +12,7 @@ import frc.robot.commands.AutoDoNothing;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ConveyorBelt;
 import frc.robot.subsystems.Swerve;
+import frc.robot.util.JoystickOverlord;
 import frc.robot.util.UpdateSwervePID;
 
 public class Robot extends TimedRobot {
@@ -52,6 +53,8 @@ public class Robot extends TimedRobot {
     //conveyorBelt.updateSmartDashboard();
     mArm.updateSmartDashboard();
     mSwerve.updateSmartDashboard();
+
+    JoystickOverlord.CommenceTheRitual();
   }
 
   @Override
