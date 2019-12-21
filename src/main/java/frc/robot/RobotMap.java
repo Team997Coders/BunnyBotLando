@@ -86,4 +86,13 @@ public class RobotMap {
       AUTO_TURN_PID = new PIDConstants(0.01, 0.0, 0.0);
 
   }
+
+  public static class FieldValues {
+
+    public static final double
+
+      STATION_TO_BUCKET_TOUCH = 25,
+      STATION_TO_BUCKET_GRAB = 23.9;
+
+  }
 }

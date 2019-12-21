@@ -16,7 +16,7 @@ import frc.robot.commands.*;
 public class AutoPickUpBucket extends CommandGroup {
   
     public AutoPickUpBucket() {
-        addSequential(new AutoDriveForward(RobotMap.Values.)); //TODO
+        addSequential(new AutoDriveForward(RobotMap.FieldValues.STATION_TO_BUCKET_GRAB)); //TODO
         addSequential(new ArmToPosition(RobotMap.Values.armGroundHeight));
         addSequential(new Grab(true));
         addSequential(new ArmToPosition(RobotMap.Values.armMaxEncoderTicks));
