@@ -11,8 +11,8 @@ public class RobotMap {
 
   public static class Speeds {
     public static final double
-      intakeIn = 0.5,
-      intakeOut = -0.5;
+      intakeIn = 1,
+      intakeOut = -1;
   }
   public static class Values{
     public static final double 
@@ -60,9 +60,9 @@ public class RobotMap {
     leftYaxis = 1,
     grabberSolenoidPort1 = 1, //TODO: Get real port
     grabberSolenoidPort2 = 0, //TODO: Get real port
-    beltyBoi = 42069, //TODO: reeeee at Emi for acutal port
+    beltyBoi = 10, //TODO: reeeee at Emi for acutal port
     rightBumper = 5,
-    leftBumper = 4;
+    leftBumper = 6;
 
     public static final int[]
 
